@@ -1,0 +1,20 @@
+{
+  "name": "ace-garage",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "react": "cd client; npm start",
+    "node": "cd api; npm run dev",
+    "dev": "concurrently \"npm run react\" \"npm run node\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^8.0.1"
+  }
+}
