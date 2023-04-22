@@ -6,7 +6,7 @@ import ROLE from "../enums/roles.enum.js";
 export const Auth = async (req, res, next) => {
   let token = req.headers.authorization || req.cookies.accesstoken;
   if (!token) {
-    return next(createError("Unauthorized | Access token required !", 403));
+    return next(createError("Unauthorized | Please login to continue !", 403));
   }
   try {
     if (token.includes(" ")) {

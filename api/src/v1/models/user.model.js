@@ -39,7 +39,7 @@ const userSchema = new mongoose.Schema(
     street: String,
     postalCode: String,
     city: String,
-    country: { type: String, required: true, default: "Nepal" },
+    country: { type: String },
     location: String,
     phone: { type: String, required: true, immutable: true },
   },

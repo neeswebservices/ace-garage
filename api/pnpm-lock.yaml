@@ -8,12 +8,15 @@ specifiers:
   cloudinary: ^1.33.0
   cookie-parser: ~1.4.4
   cors: ^2.8.5
+  countries-list: ^2.6.1
+  country-currency-phone: ^0.1.11
   crypto-js: ^4.1.1
   debug: ~2.6.9
   dotenv: ^16.0.3
   express: ~4.16.1
   express-async-handler: ^1.2.0
   express-fileupload: ^1.4.0
+  google-libphonenumber: ^3.2.32
   googleapis: ^110.0.0
   http-error: ^0.0.6
   jsonwebtoken: ^9.0.0
@@ -28,6 +31,7 @@ specifiers:
   pdfkit: ^0.13.0
   prettier: ^2.8.3
   public-ip: ^6.0.1
+  twilio: ^4.10.0
 
 dependencies:
   '@sendgrid/mail': 7.7.0_debug@2.6.9
@@ -37,12 +41,15 @@ dependencies:
   cloudinary: 1.36.1
   cookie-parser: 1.4.6
   cors: 2.8.5
+  countries-list: 2.6.1
+  country-currency-phone: 0.1.11
   crypto-js: 4.1.1
   debug: 2.6.9
   dotenv: 16.0.3
   express: 4.16.4
   express-async-handler: 1.2.0
   express-fileupload: 1.4.0
+  google-libphonenumber: 3.2.32
   googleapis: 110.0.0
   http-error: 0.0.6
   jsonwebtoken: 9.0.0
@@ -57,6 +64,7 @@ dependencies:
   pdfkit: 0.13.0
   prettier: 2.8.7
   public-ip: 6.0.1
+  twilio: 4.10.0_debug@2.6.9
 
 packages:
 
@@ -1310,6 +1318,15 @@ packages:
       vary: 1.1.2
     dev: false
 
+  /countries-list/2.6.1:
+    resolution: {integrity: sha512-jXM1Nv3U56dPQ1DsUSsEaGmLHburo4fnB7m+1yhWDUVvx5gXCd1ok/y3gXCjXzhqyawG+igcPYcAl4qjkvopaQ==}
+    dev: false
+
+  /country-currency-phone/0.1.11:
+    resolution: {integrity: sha512-YFRozqjPDpL4Kn4WXOoVAoxzi8bk7Kjtylqpx4Dqp7davZpCxXnGbeq3C7uLs7Iy3Y7pJ43Bgm1RA1I8kyzUBg==}
+    engines: {node: '>=14.0.0'}
+    dev: false
+
   /crypto-js/4.1.1:
     resolution: {integrity: sha512-o2JlM7ydqd3Qk9CA0L4NL6mTzU2sdx96a+oOfPu8Mkl/PK51vSyoi8/rQ8NknZtk44vq15lmhAj9CIAGwgeWKw==}
     dev: false
@@ -1319,6 +1336,10 @@ packages:
     engines: {node: '>= 6'}
     dev: false
     optional: true
+
+  /dayjs/1.11.7:
+    resolution: {integrity: sha512-+Yw9U6YO5TQohxLcIkrXBeY73WP3ejHWVvx8XCk3gxvQDCTEmS48ZrSZCKciI7Bhl/uCMyxYtE9UqRILmFphkQ==}
+    dev: false
 
   /debug/2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
@@ -1801,6 +1822,11 @@ packages:
     transitivePeerDependencies:
       - encoding
       - supports-color
+    dev: false
+
+  /google-libphonenumber/3.2.32:
+    resolution: {integrity: sha512-mcNgakausov/B/eTgVeX8qc8IwWjRrupk9UzZZ/QDEvdh5fAjE7Aa211bkZpZj42zKkeS6MTT8avHUwjcLxuGQ==}
+    engines: {node: '>=0.10'}
     dev: false
 
   /google-p12-pem/4.0.1:
@@ -2764,6 +2790,10 @@ packages:
     engines: {node: '>=0.6'}
     dev: false
 
+  /querystringify/2.2.0:
+    resolution: {integrity: sha512-FIqgj2EUvTa7R50u0rGsyTftzjYmv/a3hO345bZNrqabNqjtgiDMgmo4mkUjd+nzU5oF3dClKqFIPUKybUyqoQ==}
+    dev: false
+
   /quick-lru/5.1.1:
     resolution: {integrity: sha512-WuyALRjWPDGtt/wzJiadO5AXY+8hZ80hVpe6MyivgraREW751X3SbhRvG3eLKOYN+8VEvqLcf3wdnt44Z4S4SA==}
     engines: {node: '>=10'}
@@ -2833,6 +2863,10 @@ packages:
       functions-have-names: 1.2.3
     dev: false
 
+  /requires-port/1.0.0:
+    resolution: {integrity: sha512-KigOCHcocU3XODJxsu8i/j8T9tzT4adHiecwORRQ0ZZFcp7ahwXuRU1m+yuO90C5ZUyGeGfocHDI14M3L3yDAQ==}
+    dev: false
+
   /resolve-alpn/1.2.1:
     resolution: {integrity: sha512-0a1F4l73/ZFZOakJnQ3FvkJ2+gSTQWz/r2KE5OdDY0TxPm5h4GkqkWWfM47T7HsbnOtcJVEF4epCVy6u7Q3K+g==}
     dev: false
@@ -2868,6 +2902,10 @@ packages:
       sparse-bitfield: 3.0.3
     dev: false
     optional: true
+
+  /scmp/2.1.0:
+    resolution: {integrity: sha512-o/mRQGk9Rcer/jEEw/yw4mwo3EU/NvYvp577/Btqrym9Qy5/MdWGBqipbALgd2lrdWTJ5/gqDusxfnQBxOxT2Q==}
+    dev: false
 
   /semver/5.7.1:
     resolution: {integrity: sha512-sauaDf/PZdVgrLTNYHRtpXa1iRiKcaebiKQ1BJdpQlWH2lCvexQdX55snPFyK7QzpudqbCI0qXFfOasHdyNDGQ==}
@@ -3077,6 +3115,23 @@ packages:
     resolution: {integrity: sha512-336iVw3rtn2BUK7ORdIAHTyxHGRIHVReokCR3XjbckJMK7ms8FysBfhLR8IXnAgy7T0PTPNBWKiH514FOW/WSg==}
     dev: false
 
+  /twilio/4.10.0_debug@2.6.9:
+    resolution: {integrity: sha512-j6reVBUqwrGHBKnCIoL1hUDPl/Yw6EYVvkYLmFBpVQ74AGf/9BCKXnvlkAgIkwFXzZikpNuo0mqIY/k9oMiFsA==}
+    engines: {node: '>=14.0'}
+    dependencies:
+      axios: 0.26.1_debug@2.6.9
+      dayjs: 1.11.7
+      https-proxy-agent: 5.0.1
+      jsonwebtoken: 9.0.0
+      qs: 6.11.1
+      scmp: 2.1.0
+      url-parse: 1.5.10
+      xmlbuilder: 13.0.2
+    transitivePeerDependencies:
+      - debug
+      - supports-color
+    dev: false
+
   /type-check/0.3.2:
     resolution: {integrity: sha512-ZCmOJdvOWDBYJlzAoFkC+Q0+bUyEOS1ltgp1MGU03fqHG+dbi9tBFU2Rd9QKiDZFAYrhPh2JUf7rZRIuHRKtOg==}
     engines: {node: '>= 0.8.0'}
@@ -3124,6 +3179,13 @@ packages:
   /unpipe/1.0.0:
     resolution: {integrity: sha512-pjy2bYhSsufwWlKwPc+l3cN7+wuJlK6uz0YdJEOlQDbl6jo/YlPi4mb8agUkVC8BF7V8NuzeyPNqRksA3hztKQ==}
     engines: {node: '>= 0.8'}
+    dev: false
+
+  /url-parse/1.5.10:
+    resolution: {integrity: sha512-WypcfiRhfeUP9vvF0j6rw0J3hrWrw6iZv3+22h6iRMJ/8z1Tj6XfLP4DsUix5MhMPnXpiHDoKyoZ/bdCkwBCiQ==}
+    dependencies:
+      querystringify: 2.2.0
+      requires-port: 1.0.0
     dev: false
 
   /url-template/2.0.8:
@@ -3225,6 +3287,11 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: false
     optional: true
+
+  /xmlbuilder/13.0.2:
+    resolution: {integrity: sha512-Eux0i2QdDYKbdbA6AM6xE4m6ZTZr4G4xF9kahI2ukSEMCzwce2eX9WlTI5J3s+NU7hpasFsr8hWIONae7LluAQ==}
+    engines: {node: '>=6.0'}
+    dev: false
 
   /xregexp/2.0.0:
     resolution: {integrity: sha512-xl/50/Cf32VsGq/1R8jJE5ajH1yMCQkpmoS10QbFZWl2Oor4H0Me64Pu2yxvsRWK3m6soJbmGfzSR7BYmDcWAA==}

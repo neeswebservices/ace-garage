@@ -9,6 +9,8 @@ import usersRouter from "./src/v1/routes/users.routes.js";
 import authRouter from "./src/v1/routes/auth.routes.js";
 import cors from "cors";
 import getUserLocation from "./src/v1/middlewares/userAddress.js";
+import errorHandler from "./src/v1/utils/errorHandler.js";
+import APPError from "./src/v1/utils/Error.js";
 
 const app = express();
 export const __filename = url.fileURLToPath(import.meta.url);
@@ -28,14 +30,21 @@ app.use("/", getUserLocation, indexRouter);
 
 // Handling error in routes
 
-app.use((err, req, res, next) => {
-  if (err) {
-    return res.status(err.status || 500).send({
-      msg: err.message || "Opps ! Something went wrong 🥲...",
-      success: false,
-      stack: process.env.ENV === "development" ? err.stack : null,
-    });
-  }
+// app.use((err, req, res, next) => {
+//   if (err) {
+//     return res.status(err.status || 500).send({
+//       msg: err.message || "Opps ! Something went wrong 🥲...",
+//       success: false,
+//       stack: process.env.ENV === "development" ? err.stack : null,
+//     });
+//   }
+// });
+
+app.use((req, res, next) => {
+  const error = new APPError(`Cannot find ${req.originalUrl} on this server!`, 404);
+  next(error);
 });
+
+app.use(errorHandler);
 
 export default app;
