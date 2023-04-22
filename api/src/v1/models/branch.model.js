@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const locationSchema = new mongoose.Schema({
+const branchSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -35,18 +35,6 @@ const locationSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  phone: {
-    type: String,
-    required: true,
-  },
-  email: {
-    type: String,
-    required: true,
-  },
-  website: {
-    type: String,
-    required: true,
-  },
   openingHours: [
     {
       dayOfWeek: {
@@ -65,6 +53,6 @@ const locationSchema = new mongoose.Schema({
   ],
 });
 
-const Location = mongoose.model("Location", locationSchema);
+const Branch = mongoose.model("Branch", branchSchema);
 
-export default Location;
+export default Branch;

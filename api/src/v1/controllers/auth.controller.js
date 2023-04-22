@@ -16,6 +16,7 @@ import APPError from "../utils/Error.js";
 import sendOTP from "../services/otp.js";
 import { generateRandom4DigitNumber } from "../services/generator.js";
 import getPhoneCode from "../services/getPhoneCode.js";
+import sendSMS from "../services/vonage.js";
 
 // config of sendgrid to send mail
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
@@ -60,7 +61,8 @@ export const authRegister = async (req, res, next) => {
       throw new APPError("Phone number is invalid !", 400);
     }
 
-    sendOTP(`${getPhoneCode(req.location.country)}${phone}`, generateRandom4DigitNumber());
+    sendOTP(`${getPhoneCode(req.location.country)}${phone}`, generateRandom4DigitNumber(), { username });
+    // sendSMS(`${getPhoneCode(req.location.country)}${phone}`, `${username} your code is ${generateRandom4DigitNumber()}.`);
 
     // const token = generateToken({ email, username, address, password });
 

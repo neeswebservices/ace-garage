@@ -6,9 +6,9 @@ const YOUR_TWILIO_PHONE_NUMBER = process.env.YOUR_TWILIO_PHONE_NUMBER;
 
 const client = twilio(accountSid, authToken);
 
-const sendOTP = async (phoneNumber, otp) => {
+const sendOTP = async (phoneNumber, otp, data) => {
   try {
-    const message = `Your OTP is ${otp}.`;
+    const message = `${data?.username || "Your"} OTP is ${otp}.`;
     await client.messages.create({
       body: message,
       from: YOUR_TWILIO_PHONE_NUMBER,
@@ -16,7 +16,7 @@ const sendOTP = async (phoneNumber, otp) => {
     });
     console.log(`OTP sent to ${phoneNumber}`);
   } catch (err) {
-    // console.error(err.message);
+    console.error(err);
   }
 };
 

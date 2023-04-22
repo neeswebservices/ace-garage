@@ -16,6 +16,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@vonage/server-sdk": "^3.3.0",
     "concurrently": "^8.0.1"
   }
 }
