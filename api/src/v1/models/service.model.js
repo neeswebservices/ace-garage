@@ -1,44 +1,48 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const serviceSchema = new mongoose.Schema({
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: [true, 'user Required'],
-        ref: 'User',
-    },
-    category: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: [true, 'Category Required'],
-        ref: 'Category',
-    },
-    title: {
-        type: String,
-    },
-    desc: String,
-    image: [String],
-    comments: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Comment',
-        },
-    ],
-    users: [mongoose.Schema.Types.ObjectId],
-    views: {
-        type: Number,
-        default: 0,
-    },
-    price: {
-        type: Number,
-        required: true,
-    },
-    featured: { type: Boolean, default: false },
-    status: {
-        type: String,
-        enum: ['pending', 'inprogess', 'completed', 'rejected', 'archived'],
-        default: 'pending',
-    },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: [true, "User Required"],
+    ref: "User",
+  },
+  category: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: [true, "Category Required"],
+    ref: "Category",
+  },
+  subcategory: {
+    type: mongoose.Schema.Types.ObjectId,
+  },
+  title: {
+    type: String,
+  },
+  desc: String,
+  image: [String],
+  views: {
+    type: Number,
+    default: 0,
+  },
+  price: {
+    type: Number,
+    required: true,
+  },
+  featured: { type: Boolean, default: false },
+  //   status: {
+  //     type: String,
+  //     enum: ["pending", "inprogess", "completed", "rejected", "archived"],
+  //     default: "pending",
+  //   },
+  status: {
+    type: String,
+    enum: ["pending", "confirmed", "completed", "cancelled"],
+    default: "pending",
+  },
+  location: {
+    type: mongoose.Schema.Types.ObjectId,
+  },
 });
 
-const Service = mongoose.model('Service', serviceSchema);
+const Service = mongoose.model("Service", serviceSchema);
 
 export default Service;

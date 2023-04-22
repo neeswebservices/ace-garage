@@ -59,8 +59,8 @@ export const verfiyEmployee = async (req, res, next) => {
   try {
     const role = req.role;
     if (!role) return next(createError("Employee access denied !", 403));
-    if (role == 0) return next(createError("Employee access denied!", 400));
-    if (role == 2) {
+    if (role == ROLE.CUSTOMER) return next(createError("Employee access denied!", 400));
+    if (role == ROLE.ADMIN) {
       return next(createError("Admin cannot access Employee permission!", 400));
     }
 
@@ -78,7 +78,7 @@ export const verifyAdmin = async (req, res, next) => {
     const role = req.role;
     if (!role) return next(createError("Admin access denied !", 403));
 
-    if (role == 2) {
+    if (role == ROLE.ADMIN) {
       next();
     } else {
       return next(createError("Admin access denied !", 403));
