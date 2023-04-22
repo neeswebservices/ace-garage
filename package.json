@@ -10,7 +10,7 @@
     "react": "cd client; npm start",
     "node": "cd api; npm run dev",
     "dev": "concurrently \"npm run react\" \"npm run node\"",
-    "install": "cd client && npm install && cd ../api && npm install"
+    "install": "cd client && ni && cd ../api && ni"
   },
   "keywords": [],
   "author": "",

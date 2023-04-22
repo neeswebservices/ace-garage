@@ -16,7 +16,7 @@ const app = express();
 export const __filename = url.fileURLToPath(import.meta.url);
 export const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 
-app.use(logger("dev"));
+app.use(logger(":url with :method from :remote-addr :remote-user :response-time ms"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
