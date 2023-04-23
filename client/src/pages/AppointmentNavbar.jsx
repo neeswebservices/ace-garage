@@ -79,14 +79,7 @@ const ApppointmentNavbar = () => {
                   placeholder="1234567890"
                 />
               </label>
-              <label className="block">
-                <span className="text-black">Location</span>
-                <input
-                  type="text"
-                  className="mt-1 block w-full  border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                  placeholder="Tinkune, Kathmandu"
-                />
-              </label>
+
               <label className="block">
                 <span className="text-black">Select Date</span>
                 <input
