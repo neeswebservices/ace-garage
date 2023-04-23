@@ -2,10 +2,7 @@ import mongoose from "mongoose";
 
 const catSchema = new mongoose.Schema({
   name: { type: String, required: true },
-  children: [{ type: String, required: true }],
-  sub: {
-    type: [String],
-  },
+  sub: [{ type: String }],
 });
 
 catSchema.methods.findByCategoryName = async function (name) {

@@ -2,11 +2,13 @@ import axios from "axios";
 import { publicIpv4 } from "public-ip";
 
 const cache = {};
-const TTL = 60000; // 1 min
+const TTL = 900000; // 15 minutes
 
 const getUserLocation = async (req, res, next) => {
   try {
     const ipAddress = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
+    // console.log(req.ip);
+    // console.log(req.ips);
 
     if (cache[ipAddress] && Date.now() - cache[ipAddress].timestamp < TTL) {
       req.location = { ...cache[ipAddress].data };
