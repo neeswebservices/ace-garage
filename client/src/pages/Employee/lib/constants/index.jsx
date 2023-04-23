@@ -24,7 +24,18 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 		path: '/employee/createsparepart',
 		icon: <HiOutlineCube />
 	},
-
+{
+		key: 'appointment',
+		label: 'Appointment',
+		path: '/employee/appointment',
+		icon: <HiOutlineCube />
+	},
+{
+		key: 'report',
+		label: 'Report',
+		path: '/employee/report',
+		icon: <HiOutlineCube />
+	},
 
 ]
 
