@@ -14,7 +14,7 @@ const serviceSchema = new mongoose.Schema({
   subcategory: {
     type: mongoose.Schema.Types.ObjectId,
   },
-  title: {
+  name: {
     type: String,
   },
   desc: String,
@@ -38,8 +38,9 @@ const serviceSchema = new mongoose.Schema({
     enum: ["pending", "confirmed", "completed", "cancelled"],
     default: "pending",
   },
-  location: {
+  branch: {
     type: mongoose.Schema.Types.ObjectId,
+    ref: "Branch",
   },
 });
 
