@@ -13,6 +13,9 @@ import Login from './pages/Login'
 import EmployeeLayout from './pages/Employee/components/shared/EmployeeLayout'
 import CreateService from './pages/Employee/pages/CreateService'
 import CreateSparePart from './pages/Employee/pages/CreateSparePart'
+import Appointment from './pages/Employee/pages/Appointment'
+import Report from './pages/Employee/pages/Report'
+import AppointmentNavbar from './pages/AppointmentNavbar'
 
 
 
@@ -23,6 +26,9 @@ function App() {
         <Route exact path="/" element={<HomePage />}></Route>
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/appointment" element={<AppointmentNavbar />} />
+
 
         {/* Admin */}
         <Route path="/admin" element={<Layout />}>
@@ -40,6 +46,8 @@ function App() {
           <Route index element={<Dashboard />} />
           <Route path="/employee/addservice" element={<CreateService />} />
           <Route path="/employee/createsparepart" element={<CreateSparePart />} />
+          <Route path="/employee/appointment" element={<Appointment />} />
+          <Route path="/employee/report" element={<Report />} />
 
 
         </Route>
