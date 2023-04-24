@@ -26,15 +26,12 @@ import AdminRoute from "./routes/adminRoute";
 import EmployeeRoute from "./routes/employeeRoute";
 import Contact from "./components/Contact";
 import Service from "./components/Service";
-<<<<<<< HEAD
 import { userLogin } from "./features/auth/authAction";
 import ServiceList from "./components/SpareParts";
 import SpareParts from "./components/SpareParts";
 import Sparepart from "./components/Sparepart";
-=======
 import ServiceList from "./components/SpareParts";
 import SpareParts from "./components/SpareParts";
->>>>>>> 578ce18 (changes to sparelist)
 
 function App() {
   const dispatch = useDispatch();
