@@ -24,21 +24,21 @@ const Navbar = () => {
   };
 
   return (
-    <div className="flex justify-between items-center h-24 max-w-[1240px] mx-auto px-4 text-black ">
+    <div className="flex justify-between items-center h-24 max-w-[1240px] mx-auto px-4 text-black  ">
       <Link to="/" className="w-full text-3xl font-bold text-blue-600">
         Ace Garage{" "}
       </Link>
       <ul className="hidden md:flex">
-        <Link to="/Home" className="p-4">
+        <Link to="/" className="p-4">
           Home
         </Link>
-        <Link to="/service" className="p-4">
+        <Link to="/services" className="p-4">
           Service
         </Link>
         <Link to="/appointment" className="p-4">
           Appointment
         </Link>
-        <Link to="/help" className="p-4">
+        <Link to="/contact" className="p-4">
           Connect
         </Link>
 

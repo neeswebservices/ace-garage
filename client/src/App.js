@@ -25,6 +25,9 @@ import { setCredentials } from "./features/user/userSlice";
 import Protected from "./routes/ProtectedRoute";
 import AdminRoute from "./routes/adminRoute";
 import EmployeeRoute from "./routes/employeeRoute";
+import Contact from "./components/Contact";
+import Service from "./components/Service";
+import ServiceList from "./components/ServiceList";
 
 function App() {
   const dispatch = useDispatch();
@@ -51,6 +54,10 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/services" element={<ServiceList />} />
+        <Route path="/single-service" element={<Service />} />
+
         <Route element={<Protected />}>
           <Route path="/appointment" element={<AppointmentNavbar />} />
         </Route>

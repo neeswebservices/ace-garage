@@ -1,7 +1,7 @@
 {
   "name": "ace-garage",
   "version": "1.0.0",
-  "description": "",
+  "description": "A bike service and management !",
   "main": "index.js",
   "directories": {
     "test": "test"
