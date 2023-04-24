@@ -1,4 +1,5 @@
 import axiosClient from "./axiosClient.js";
+import getAPI from "./getApi";
 
 const adminAPI = {
   createCategory: (params) => axiosClient.post("admin/category", params),

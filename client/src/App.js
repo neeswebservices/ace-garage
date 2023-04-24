@@ -26,7 +26,6 @@ import AdminRoute from "./routes/adminRoute";
 import EmployeeRoute from "./routes/employeeRoute";
 import Contact from "./components/Contact";
 import Service from "./components/Service";
-import ServiceList from "./components/ServiceList";
 import { userLogin } from "./features/auth/authAction";
 import ServiceList from "./components/SpareParts";
 import SpareParts from "./components/SpareParts";
