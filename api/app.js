@@ -16,7 +16,9 @@ const app = express();
 export const __filename = url.fileURLToPath(import.meta.url);
 export const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 
-app.use(logger(":url with :method from :remote-addr :remote-user :response-time ms"));
+app.use(
+  logger(":url with :method from :remote-addr :remote-user :response-time ms")
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -61,7 +63,10 @@ app.use("/", getUserLocation, indexRouter);
 // });
 
 app.use((req, res, next) => {
-  const error = new APPError(`Cannot find ${req.originalUrl} on this server!`, 404);
+  const error = new APPError(
+    `Cannot find ${req.originalUrl} on this server!`,
+    404
+  );
   next(error);
 });
 

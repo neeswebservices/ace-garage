@@ -2,21 +2,37 @@ import Select from "react-select";
 import { useQuery } from "@tanstack/react-query";
 import getAPI from "../api/getApi.js";
 import Spinner from "./common/Spinner";
+import { toast } from "react-toastify";
+import { useForm } from "react-hook-form";
+import { useState } from "react";
 
 export const Hero = () => {
+  const [selectedOption, setSelectedOption] = useState(null);
+
+  const { register, handleSubmit, reset } = useForm();
+
   const { data, isLoading, error, refetch } = useQuery(["branch"], () =>
     getAPI.getBranches()
   );
   const options = data
     ? data.data.reduce((acc, cur) => {
         acc.push({
-          value: `${cur.city}, ${cur.address}`,
-          label: cur.name,
+          value: cur._id,
+          label: `${cur.city}, ${cur.address}`,
           ...cur,
         });
         return acc;
       }, [])
     : [];
+
+  const submitForm = (data) => {
+    if (!selectedOption) {
+      return toast.error("Please select branch!");
+    }
+  };
+  const handleSelectChange = (selectedOption) => {
+    setSelectedOption(selectedOption);
+  };
 
   return (
     <div className="bg-white ml-6 mt-[-100px]">
@@ -38,26 +54,34 @@ export const Hero = () => {
           {isLoading ? (
             <Spinner />
           ) : (
-            <div className="mt-4 flex items-center space-x-4">
+            <form
+              onSubmit={handleSubmit(submitForm)}
+              className="mt-4 flex items-center space-x-4"
+            >
               <Select
                 classNamePrefix="select"
                 styles={{
                   control: (baseStyles, state) => ({
                     ...baseStyles,
                     borderColor: state.isFocused ? "blue" : "grey",
-                    width: "300px",
+                    width: "400px",
                   }),
                 }}
-                defaultValue={options[0]}
+                onChange={handleSelectChange}
+                // defaultValue={options[0]}
+                value={selectedOption}
                 isSearchable={true}
-                name="branch"
                 options={options}
+                // {...register("branch")}
                 placeholder="Select the branch..."
               />
-              <button className="rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white">
+              <button
+                type="submit"
+                className="rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white"
+              >
                 Submit
               </button>
-            </div>
+            </form>
           )}
         </div>
       </div>
