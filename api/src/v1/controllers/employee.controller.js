@@ -6,7 +6,25 @@ export const createService = tryCatch(async (req, res, next) => {
   const { category } = req.params;
   const { name, desc, price, branch } = req.body;
 
-  const service = new Service({ user: req.user, category, name, desc, price, branch });
+  const image = req?.file;
+
+  const service = new Service({
+    user: req.user,
+    name,
+    desc,
+    price,
+    category,
+    branch,
+  });
+
+  if (image) {
+    const imageURL = `http://${address.ip()}:${process.env.PORT}/${
+      req.file.path
+    }`;
+    console.log(imageURL);
+    spare.image = imageURL;
+  }
+
   await service.save();
 
   return res.send(new HttpResponse("Service created", 200, service));

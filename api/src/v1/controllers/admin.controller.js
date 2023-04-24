@@ -27,7 +27,9 @@ export const createBreakdown = tryCatch(async (req, res, next) => {
   }
 
   const eservice = await Eservice.create({ name, desc, price });
-  return res.send(new HttpResponse("Emergency Breakdown Created", 200, eservice));
+  return res.send(
+    new HttpResponse("Emergency Breakdown Created", 200, eservice)
+  );
 });
 
 export const createEmployee = tryCatch(async (req, res, next) => {
@@ -35,7 +37,11 @@ export const createEmployee = tryCatch(async (req, res, next) => {
 
   if (!user) throw new APPError("User Invalid", 400);
 
-  await User.findByIdAndUpdate(user, { role: 1 }, { new: true, select: "role" });
+  await User.findByIdAndUpdate(
+    user,
+    { role: 1 },
+    { new: true, select: "role" }
+  );
   return res.send(new HttpResponse("Employee Created", 200));
 });
 
@@ -52,5 +58,11 @@ export const getUser = tryCatch(async (req, res, next) => {
 });
 
 export const getEmployee = tryCatch(async (req, res, next) => {
-  return res.send(new HttpResponse("Employees", 200, await User.find({ role: 1 })));
+  return res.send(
+    new HttpResponse("Employees", 200, await User.find({ role: 1 }))
+  );
+});
+
+export const getBranches = tryCatch(async (req, res, next) => {
+  return res.send(new HttpResponse("Employees", 200, await Branch.find()));
 });

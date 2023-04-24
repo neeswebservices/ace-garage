@@ -19,7 +19,6 @@ export const Signup = () => {
       return toast.error("Password do not matched!");
     }
     const dataa = await authAPI.signup({ ...data });
-    console.log(dataa);
   };
 
   return (
@@ -29,13 +28,13 @@ export const Signup = () => {
           <div className="absolute inset-0">
             <img
               className="h-full w-full object-cover object-top"
-              src="https://plus.unsplash.com/premium_photo-1661900991997-81d451f37c15?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80"
+              src="https://images.unsplash.com/photo-1577801622187-9a1076d049da?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
               alt=""
             />
           </div>
           <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
         </div>
-        <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
+        <div className="flex  items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
           <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md">
             <h2 className="text-3xl font-bold leading-tight text-black dark:text-white sm:text-4xl">Sign Up</h2>
 

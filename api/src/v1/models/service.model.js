@@ -18,7 +18,7 @@ const serviceSchema = new mongoose.Schema({
     type: String,
   },
   desc: String,
-  image: [String],
+  image: String,
   views: {
     type: Number,
     default: 0,

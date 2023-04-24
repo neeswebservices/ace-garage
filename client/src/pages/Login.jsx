@@ -1,26 +1,50 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useQuery } from "@tanstack/react-query";
 import authAPI from "../api/authApi.js";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
+import { useLogin } from "../hooks/authHooks";
+import Spinner from "../components/common/Spinner";
+import Loading from "../components/common/Loading";
+import { useSelector, useDispatch } from "react-redux";
+import { userLogin } from "../features/auth/authAction";
 
-export const Login = () => {
+export const Login = ({}) => {
   const queryClient = useQueryClient();
-  const { register, handleSubmit, reset } = useForm();
+  // const { register, handleSubmit, reset } = useForm();
+  // const { isLoading, isError, error, data, isSuccess, mutate } = useLogin();
+
+  // const navigate = useNavigate();
+
+  // const submitForm = async (data) => {
+  //   // const { data: response, isLoading } = useQuery(["auth"], authAPI.login(data));
+  //   // const res = await authAPI.login({ ...data });
+  //   await mutate({ ...data });
+  //   reset();
+  //   navigate("/");
+  // };
+  const { loading, logged, success, userInfo, error } = useSelector(
+    (state) => state.auth
+  );
+  const { userToken } = useSelector((state) => state.auth);
+
+  // const { data: details, isFetching } = useGetDetailsQuery('userDetails', {
+  //     pollingInterval: 900000,
+  // });
+
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const submitForm = async (data) => {
-    // const { data: response, isLoading } = useQuery(["auth"], authAPI.login(data));
-    const res = await authAPI.login({ ...data });
+  const { register, handleSubmit, reset } = useForm();
 
-    if (res?.status) {
-      localStorage.setItem("token", res.data.token);
-      reset();
-      navigate("/");
-      queryClient.invalidate("status");
-    }
+  useEffect(() => {
+    if (logged) navigate("/");
+  }, [navigate, logged]);
+
+  const submitForm = (data) => {
+    dispatch(userLogin(data));
   };
 
   return (
@@ -38,12 +62,19 @@ export const Login = () => {
         </div>
         <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
           <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md">
-            <h2 className="text-3xl font-bold leading-tight text-black dark:text-white sm:text-4xl">Login</h2>
+            <h2 className="text-3xl font-bold leading-tight text-black dark:text-white sm:text-4xl">
+              Login
+            </h2>
 
             <form onSubmit={handleSubmit(submitForm)} className="mt-2">
+              {loading ? <Spinner /> : null}
+
               <div className="space-y-5">
                 <div>
-                  <label htmlFor="email" className="text-base font-medium text-gray-900 dark:text-gray-200">
+                  <label
+                    htmlFor="email"
+                    className="text-base font-medium text-gray-900 dark:text-gray-200"
+                  >
                     {" "}
                     Username{" "}
                   </label>
@@ -59,7 +90,10 @@ export const Login = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="password" className="text-base font-medium text-gray-900 dark:text-gray-200">
+                  <label
+                    htmlFor="password"
+                    className="text-base font-medium text-gray-900 dark:text-gray-200"
+                  >
                     {" "}
                     Password{" "}
                   </label>
@@ -88,7 +122,11 @@ export const Login = () => {
                       stroke="currentColor"
                       className="ml-2 h-4 w-4"
                     >
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
+                      />
                     </svg>
                   </button>
                 </div>

@@ -3,7 +3,11 @@ import sanitize from "mongo-sanitize";
 import jwt from "jsonwebtoken";
 import crypto from "node:crypto";
 import { generateToken, verifyToken, returnTime } from "../utils/utils.js";
-import { validateUsername, validateEmail, validatePassword } from "../utils/validation.js";
+import {
+  validateUsername,
+  validateEmail,
+  validatePassword,
+} from "../utils/validation.js";
 import User from "../models/user.model.js";
 import { createError } from "../config/createError.js";
 import bcrypt from "bcryptjs";
@@ -34,14 +38,18 @@ export const authRegister = async (req, res, next) => {
 
     console.log(req.location);
 
-    if (!email || !username || !password || !address || !phone) return res.status(400).json({ msg: "Please enter all fields! " });
+    if (!email || !username || !password || !address || !phone)
+      return res.status(400).json({ msg: "Please enter all fields! " });
 
     const userExist = await User.findOne({
       $or: [{ username }, { email }],
     });
 
     if (userExist) {
-      throw new APPError("Email or username already taken please chooose another !", 403);
+      throw new APPError(
+        "Email or username already taken please chooose another !",
+        403
+      );
     }
     if (username.length <= 6 || username.length > 15)
       return res.status(400).json({
@@ -49,12 +57,17 @@ export const authRegister = async (req, res, next) => {
       });
     if (!validateUsername(username))
       return res.status(400).json({
-        message: "Username should be alphanumeric and not contain special characters !",
+        message:
+          "Username should be alphanumeric and not contain special characters !",
       });
-    if (!validateEmail(email)) return res.status(400).json({ message: "Email address should be valid!" });
+    if (!validateEmail(email))
+      return res
+        .status(400)
+        .json({ message: "Email address should be valid!" });
     if (!validatePassword(password)) {
       return res.status(400).json({
-        message: "Password must contain one uppercase, symbol, number, and atleast 8 characters !",
+        message:
+          "Password must contain one uppercase, symbol, number, and atleast 8 characters !",
       });
     }
 
@@ -62,7 +75,11 @@ export const authRegister = async (req, res, next) => {
       throw new APPError("Phone number is invalid !", 400);
     }
 
-    sendOTP(`${getPhoneCode(req.location.country)}${phone}`, generateRandom4DigitNumber(), { username });
+    sendOTP(
+      `${getPhoneCode(req.location.country)}${phone}`,
+      generateRandom4DigitNumber(),
+      { username }
+    );
     // sendSMS(`${getPhoneCode(req.location.country)}${phone}`, `${username} your code is ${generateRandom4DigitNumber()}.`);
 
     // const token = generateToken({ email, username, address, password });
@@ -122,7 +139,9 @@ export const authRegister = async (req, res, next) => {
       ...(name && name),
     })
       .then((msg) => {
-        return res.send(new HttpResponse("User registered successfully !", 200));
+        return res.send(
+          new HttpResponse("User registered successfully !", 200)
+        );
       })
       .catch((err) => {
         console.log(err);
@@ -144,7 +163,8 @@ export const userDetails = tryCatch(async (req, res, next) => {
 export const authActivate = async (req, res, next) => {
   const { token } = req.params || req.body || req.headers["token"];
   try {
-    if (!token) return res.status(403).send({ success: false, msg: "Invalid request !" });
+    if (!token)
+      return res.status(403).send({ success: false, msg: "Invalid request !" });
 
     jwt.verify(token, process.env.AUTH_SECRET, async (err, result) => {
       if (err) return res.status(403).send({ msg: "Unauthorized !" });
@@ -179,7 +199,8 @@ export const authActivate = async (req, res, next) => {
 export const verifyLogin = tryCatch(async (req, res, next) => {
   const { emailorusername, password } = req.body;
 
-  if (!emailorusername) return next(createError("Please enter your Email or Username.", 400));
+  if (!emailorusername)
+    return next(createError("Please enter your Email or Username.", 400));
 
   if (!password) return next(createError("Please submit your Password.", 400));
 
@@ -213,7 +234,7 @@ export const logout = async (req, res, next) => {
 
 export const checkLogin = asyncHandler(async (req, res, next) => {
   if (req.user) {
-    const user = await User.findById(req.user);
+    const user = await User.findById(req.user).select("+role");
     // return res.status(200).send({ user, status: true, msg: "User is logged" });
     return res.send(new HttpResponse("User", 200, user));
   }
@@ -237,7 +258,10 @@ export const forgotPassword = asyncHandler(async (req, res, next) => {
 
     const resetToken = crypto.randomBytes(32).toString("hex") + userExist._id;
 
-    const hashedToken = crypto.createHash("sha256").update(resetToken).digest("hex");
+    const hashedToken = crypto
+      .createHash("sha256")
+      .update(resetToken)
+      .digest("hex");
 
     const userToken = new Token({
       userId: userExist._id,
@@ -294,14 +318,18 @@ export const resetPassword = asyncHandler(async (req, res, next) => {
 
     if (!resetToken) return res.status(400).send({ msg: "Invalid Request !" });
 
-    const hashedToken = crypto.createHash("sha256").update(resetToken).digest("hex");
+    const hashedToken = crypto
+      .createHash("sha256")
+      .update(resetToken)
+      .digest("hex");
 
     const userToken = await Token.findOne({
       token: hashedToken,
       expiresAt: { $gt: Date.now() },
     });
 
-    if (!userToken) return res.status(404).send({ msg: "Invalid or expired token!" });
+    if (!userToken)
+      return res.status(404).send({ msg: "Invalid or expired token!" });
     if (!validatePassword(password))
       return res.status(400).send({
         msg: "Password should contain one uppercase, symbol, number and atleast 8 characters",

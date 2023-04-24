@@ -37,7 +37,7 @@ axiosClient.interceptors.response.use(
       toast.error(err.response.data.message);
       return err.response.data;
     }
-    return err.response?.data;
+    return err;
   }
 );
 

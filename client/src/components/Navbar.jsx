@@ -1,12 +1,26 @@
 import React, { useState } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { logout } from "../features/auth/authSlice";
+import { removeCredentials } from "../features/user/userSlice";
 
 const Navbar = () => {
+  const { loading, logged } = useSelector((state) => state.auth);
+  const { admin, employee } = useSelector((state) => state.user);
   const [nav, setNav] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleNav = () => {
     setNav(!nav);
+  };
+
+  const handleLogout = () => {
+    dispatch(removeCredentials());
+    dispatch(logout());
+    navigate("/");
   };
 
   return (
@@ -28,17 +42,58 @@ const Navbar = () => {
           Connect
         </Link>
 
-        <Link
-          to="/signup"
-          className="p-4 text-center font-medium rounded-md w-24 px-3 text-white bg-blue-600"
-          style={{
-            height: "40px",
-            paddingTop: "9px",
-            marginTop: "6px",
-          }}
-        >
-          SignUp
-        </Link>
+        {admin === true && logged === true && (
+          <Link to="/admin" className="p-4">
+            Admin
+          </Link>
+        )}
+        {employee === true && logged === true && (
+          <Link to="/employee" className="p-4">
+            employee
+          </Link>
+        )}
+
+        {logged ? (
+          <>
+            <button
+              onClick={handleLogout}
+              className="p-4 text-center font-medium rounded-md w-24 px-3 text-black bg-blue-700 text-white"
+              style={{
+                height: "40px",
+                paddingTop: "9px",
+                marginTop: "6px",
+              }}
+            >
+              Logout
+            </button>
+          </>
+        ) : (
+          <>
+            <Link
+              to="/signup"
+              className="p-4 text-center font-medium rounded-md w-24 px-3 text-white bg-blue-600"
+              style={{
+                height: "40px",
+                paddingTop: "9px",
+                marginTop: "6px",
+                marginRight: "10px",
+              }}
+            >
+              SignUp
+            </Link>
+            <Link
+              to="/login"
+              className="p-4 text-center font-medium rounded-md w-24 px-3 text-white bg-blue-600"
+              style={{
+                height: "40px",
+                paddingTop: "9px",
+                marginTop: "6px",
+              }}
+            >
+              Login
+            </Link>
+          </>
+        )}
       </ul>
       <div onClick={handleNav} className="block md:hidden ">
         {nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
@@ -55,7 +110,7 @@ const Navbar = () => {
         <li className="p-4 border-b border-gray-600">Services</li>
         <li className="p-4 border-b border-gray-600">Help</li>
         <li className="p-4 border-b border-gray-600">About</li>
-        <li className="p-4">Become a vendor</li>
+        <li className="p-4">Become a employee</li>
       </ul>
     </div>
   );
