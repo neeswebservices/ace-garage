@@ -41,4 +41,11 @@ export const DASHBOARD_SIDEBAR_LINKS = [
     path: "/admin/category",
     icon: <HiOutlineCube />,
   },
+
+  {
+    key: "createfaq",
+    label: "Create FAQ",
+    path: "/admin/faq",
+    icon: <HiOutlineCube />,
+  },
 ];

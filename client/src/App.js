@@ -30,8 +30,9 @@ import { userLogin } from "./features/auth/authAction";
 import ServiceList from "./components/SpareParts";
 import SpareParts from "./components/SpareParts";
 import Sparepart from "./components/Sparepart";
-import ServiceList from "./components/SpareParts";
-import SpareParts from "./components/SpareParts";
+// import ServiceList from "./components/SpareParts";
+// import SpareParts from "./components/SpareParts";
+import FAQ from "./pages/Admin/pages/FAQ";
 
 function App() {
   const dispatch = useDispatch();
@@ -67,16 +68,19 @@ function App() {
         </Route>
 
         {/* Admin */}
-        <Route element={<AdminRoute />}>
-          <Route path="/admin" element={<Layout />}>
-            <Route index element={<Dashboard />} />
-            <Route path="/admin/branch" element={<CreateBranch />} />
-            <Route path="/admin/totalusers" element={<TotalUser />} />
-            <Route path="/admin/totalemployee" element={<TotalEmployee />} />
-            <Route path="/admin/category" element={<CreateCategory />} />
-            <Route path="/admin/totalproducts" element={<TotalProduct />} />
-          </Route>
+
+        {/* <Route element={<AdminRoute />}> */}
+        <Route path="/admin" element={<Layout />}>
+          <Route index element={<Dashboard />} />
+          <Route path="/admin/branch" element={<CreateBranch />} />
+          <Route path="/admin/totalusers" element={<TotalUser />} />
+          <Route path="/admin/totalemployee" element={<TotalEmployee />} />
+          <Route path="/admin/category" element={<CreateCategory />} />
+          <Route path="/admin/totalproducts" element={<TotalProduct />} />
+          <Route path="/admin/faq" element={<FAQ />} />
         </Route>
+        {/* </Route> */}
+
         {/* Employee*/}
         <Route element={<EmployeeRoute />}>
           <Route path="/employee" element={<EmployeeLayout />}>
