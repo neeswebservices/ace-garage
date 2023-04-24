@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "../App.css";
-import Navbar from "./Navbar";
-import Footer from "./Footer";
 
-const SpareParts = () => {
+const ServiceList = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -22,23 +19,31 @@ const SpareParts = () => {
   const dummyProducts = [
     {
       id: 1,
-      name: "Clutch 2x",
+      name: "Puncture Fitting",
+      description:
+        "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+      price: 2099,
+      image:
+        "https://images.unsplash.com/photo-1597766347634-277bf2c89c32?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: 2,
+      name: "Engine Seize",
       description:
         "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
       price: 1099,
       image:
-        "https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1024,h_577/https://backbiker.com/wp-content/uploads/2022/09/Bicycle-driverain-1024x577.png",
+        "https://traton.com/.imaging/mte/tab-theme/standardLandscape-XL/dam/02_Newsroom/01_News/Ehrenrunde-f%C3%BCr-den-Diesel/traton-header-cbe-motor.jpg/jcr:content/traton-header-cbe-motor.jpg",
     },
   ];
 
   return (
     <>
-      <Navbar />
-      <div className="min-h-screen bg-gray-100">
+      <div className="min-h-screen mt-[-68px]">
         <div className="max-w-7xl mx-auto py-7 sm:px-6 lg:px-8">
-          <h1 className="text-4xl  mt-16 font-bold text-center ">
+          {/* <h1 className="text-4xl  mt-16 font-bold text-center ">
             List of Spare Parts
-          </h1>
+          </h1> */}
         </div>
         {/* Service List */}
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 ">
@@ -75,7 +80,7 @@ const SpareParts = () => {
                           className="mt-4 inline-flex items-center px-4 py-2 border border-transparent font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 "
                           onClick={() => handleAddToCart(product)}
                         >
-                          Add to cart
+                          Book Now
                         </button>
                       </div>
                     </div>
@@ -101,7 +106,7 @@ const SpareParts = () => {
                           Rs.{product.price}
                         </p>
                         <button className="bg-blue-500 text-white font-bold py-2 px-4 w-full rounded mt-4 hover:bg-blue-700">
-                          Add to Cart
+                          Book Now
                         </button>
                       </div>
                     </div>
@@ -110,9 +115,8 @@ const SpareParts = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 };
 
-export default SpareParts;
+export default ServiceList;
