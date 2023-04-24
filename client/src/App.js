@@ -28,10 +28,10 @@ import Contact from "./components/Contact";
 import Service from "./components/Service";
 import { userLogin } from "./features/auth/authAction";
 import ServiceList from "./components/SpareParts";
+// import SpareParts from "./components/SpareParts";
+// import ServiceList from "./components/SpareParts";
 import SpareParts from "./components/SpareParts";
 import Sparepart from "./components/Sparepart";
-// import ServiceList from "./components/SpareParts";
-// import SpareParts from "./components/SpareParts";
 import FAQ from "./pages/Admin/pages/FAQ";
 
 function App() {
@@ -50,6 +50,8 @@ function App() {
     }
     refetch();
   }, [data, dispatch, userToken, logged, loading]);
+
+  // changes
 
   return (
     <Router>
