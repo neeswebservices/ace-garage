@@ -4,7 +4,7 @@ import "../App.css";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 
-const ServiceList = () => {
+const SpareParts = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const ServiceList = () => {
   const dummyProducts = [
     {
       id: 1,
-      name: "Clutch Repair",
+      name: "Clutch 2x",
       description:
         "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
       price: 1099,
@@ -37,11 +37,11 @@ const ServiceList = () => {
       <div className="min-h-screen bg-gray-100">
         <div className="max-w-7xl mx-auto py-7 sm:px-6 lg:px-8">
           <h1 className="text-4xl  mt-16 font-bold text-center ">
-            Service List
+            List of Spare Parts
           </h1>
         </div>
         {/* Service List */}
-        <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 ">
           <div className="flex flex-wrap -mx-4">
             {products.length > 0
               ? products.map((product) => (
@@ -59,10 +59,24 @@ const ServiceList = () => {
                         <h2 className="text-lg font-semibold text-gray-900">
                           {product.name}
                         </h2>
-                        <p className="text-gray-700">{product.description}</p>
+                        <p className="text-gray-700">
+                          {product.description}
+                          {/* <button
+                            className="mt-4 inline-flex items-center px-4 py-2 border border-transparent font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                            onClick={() => handleAddToCart(product)}
+                          >
+                            Add to cart
+                          </button> */}
+                        </p>
                         <p className="mt-2 text-gray-900 font-bold">
                           Rs.{product.price}
                         </p>
+                        <button
+                          className="mt-4 inline-flex items-center px-4 py-2 border border-transparent font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 "
+                          onClick={() => handleAddToCart(product)}
+                        >
+                          Add to cart
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -86,6 +100,9 @@ const ServiceList = () => {
                         <p className="mt-2 text-gray-900 font-bold">
                           Rs.{product.price}
                         </p>
+                        <button className="bg-blue-500 text-white font-bold py-2 px-4 w-full rounded mt-4 hover:bg-blue-700">
+                          Add to Cart
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -98,4 +115,4 @@ const ServiceList = () => {
   );
 };
 
-export default ServiceList;
+export default SpareParts;

@@ -28,6 +28,8 @@ import Contact from "./components/Contact";
 import Service from "./components/Service";
 import ServiceList from "./components/ServiceList";
 import { userLogin } from "./features/auth/authAction";
+import ServiceList from "./components/SpareParts";
+import SpareParts from "./components/SpareParts";
 
 function App() {
   const dispatch = useDispatch();
@@ -47,48 +49,46 @@ function App() {
   }, [data, dispatch, userToken, logged, loading]);
 
   return (
-    <>
-      <Router>
-        <Routes>
-          <Route exact path="/" element={<HomePage />}></Route>
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/services" element={<ServiceList />} />
-          <Route path="/single-service" element={<Service />} />
+    <Router>
+      <Routes>
+        <Route exact path="/" element={<HomePage />}></Route>
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/spareparts" element={<SpareParts />} />
+        <Route path="/single-service" element={<Service />} />
 
-          <Route element={<Protected />}>
-            <Route path="/appointment" element={<AppointmentNavbar />} />
-          </Route>
+        <Route element={<Protected />}>
+          <Route path="/appointment" element={<AppointmentNavbar />} />
+        </Route>
 
-          {/* Admin */}
-          <Route element={<AdminRoute />}>
-            <Route path="/admin" element={<Layout />}>
-              <Route index element={<Dashboard />} />
-              <Route path="/admin/branch" element={<CreateBranch />} />
-              <Route path="/admin/totalusers" element={<TotalUser />} />
-              <Route path="/admin/totalemployee" element={<TotalEmployee />} />
-              <Route path="/admin/category" element={<CreateCategory />} />
-              <Route path="/admin/totalproducts" element={<TotalProduct />} />
-            </Route>
+        {/* Admin */}
+        <Route element={<AdminRoute />}>
+          <Route path="/admin" element={<Layout />}>
+            <Route index element={<Dashboard />} />
+            <Route path="/admin/branch" element={<CreateBranch />} />
+            <Route path="/admin/totalusers" element={<TotalUser />} />
+            <Route path="/admin/totalemployee" element={<TotalEmployee />} />
+            <Route path="/admin/category" element={<CreateCategory />} />
+            <Route path="/admin/totalproducts" element={<TotalProduct />} />
           </Route>
-          {/* Employee*/}
-          <Route element={<EmployeeRoute />}>
-            <Route path="/employee" element={<EmployeeLayout />}>
-              <Route index element={<Dashboard />} />
-              <Route path="/employee/addservice" element={<CreateService />} />
-              <Route
-                path="/employee/createsparepart"
-                element={<CreateSparePart />}
-              />
-              <Route path="/employee/appointment" element={<Appointment />} />
-              <Route path="/employee/report" element={<Report />} />
-            </Route>
+        </Route>
+        {/* Employee*/}
+        <Route element={<EmployeeRoute />}>
+          <Route path="/employee" element={<EmployeeLayout />}>
+            <Route index element={<Dashboard />} />
+            <Route path="/employee/addservice" element={<CreateService />} />
+            <Route
+              path="/employee/createsparepart"
+              element={<CreateSparePart />}
+            />
+            <Route path="/employee/appointment" element={<Appointment />} />
+            <Route path="/employee/report" element={<Report />} />
           </Route>
-        </Routes>
-      </Router>
-    </>
+        </Route>
+      </Routes>
+    </Router>
   );
 }
 
