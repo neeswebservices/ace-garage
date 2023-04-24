@@ -92,29 +92,30 @@ const CreateBranch = () => {
         </button>
       </form>
 
-      <div>
+      {/* <div>
         {data?.data?.map((item, index) => (
           <div key={index}>{item?.name}</div>
         ))}
-      </div>
+      </div> */}
 
-      <h2 className="text-2xl font-bold mt-8 mb-4">Branches</h2>
-      <table>
+      <h2 className="text-2xl font-bold mt-8 mb-4 text-center">Branches</h2>
+
+      <table className="table-auto w-full">
         <thead>
-          <tr>
-            <th>Name</th>
-            <th>Address</th>
-            <th>City</th>
-            <th>Country</th>
+          <tr className="bg-blue-600 text-white">
+            <th className=" text-left px-4 py-2">Address</th>
+            <th className="px-4 text-left py-2">City</th>
+            <th className="px-4 text-left py-2">Name</th>
+            <th className="px-4 text-left py-2">Country</th>
           </tr>
         </thead>
         <tbody>
           {data?.data?.map((item, index) => (
-            <tr key={index}>
-              <td>{item?.name}</td>
-              <td>{item?.address}</td>
-              <td>{item?.city}</td>
-              <td>{item?.country}</td>
+            <tr key={index} className={index % 2 === 0 ? "bg-gray-100" : ""}>
+              <td className="border px-4 py-2">{item?.name}</td>
+              <td className="border px-4 py-2">{item?.address}</td>
+              <td className="border px-4 py-2">{item?.city}</td>
+              <td className="border px-4 py-2">{item?.country}</td>
             </tr>
           ))}
         </tbody>
