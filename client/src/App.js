@@ -6,7 +6,6 @@ import CreateBranch from "./pages/Admin/pages/CreateBranch";
 import TotalUser from "./pages/Admin/pages/TotalUser";
 import TotalEmployee from "./pages/Admin/pages/TotalEmployee";
 import TotalProduct from "./pages/Admin/pages/TotalProduct";
-import CreateEmployee from "./pages/Admin/pages/CreateEmployee";
 import CreateCategory from "./pages/Admin/pages/CreateCategory";
 import HomePage from "./pages/HomePage";
 import Signup from "./pages/Signup";
@@ -69,7 +68,6 @@ function App() {
             <Route index element={<Dashboard />} />
             <Route path="/admin/branch" element={<CreateBranch />} />
             <Route path="/admin/totalusers" element={<TotalUser />} />
-            <Route path="/admin/createemployee" element={<CreateEmployee />} />
             <Route path="/admin/totalemployee" element={<TotalEmployee />} />
             <Route path="/admin/category" element={<CreateCategory />} />
             <Route path="/admin/totalproducts" element={<TotalProduct />} />

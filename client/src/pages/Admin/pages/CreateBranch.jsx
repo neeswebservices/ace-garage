@@ -97,6 +97,28 @@ const CreateBranch = () => {
           <div key={index}>{item?.name}</div>
         ))}
       </div>
+
+      <h2 className="text-2xl font-bold mt-8 mb-4">Branches</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Address</th>
+            <th>City</th>
+            <th>Country</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data?.data?.map((item, index) => (
+            <tr key={index}>
+              <td>{item?.name}</td>
+              <td>{item?.address}</td>
+              <td>{item?.city}</td>
+              <td>{item?.country}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };
