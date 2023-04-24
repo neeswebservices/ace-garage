@@ -24,13 +24,7 @@ const userSlice = createSlice({
       state.role = payload.role;
       state.id = payload._id;
     },
-    removeCredentials: (state) => {
-      state.employee = false;
-      state.admin = false;
-      state.username = null;
-      state.role = 0;
-      state.id = null;
-    },
+    removeCredentials: (state) => initialState,
   },
   extraReducers: {
     [setUser.loading]: (state) => {

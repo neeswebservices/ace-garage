@@ -5,14 +5,15 @@ export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
     baseUrl: `${baseURL}`,
-    // baseUrl: 'http://127.0.0.1:5000/',
     prepareHeaders: (headers, { getState }) => {
-      const token = getState().auth.userToken;
+      const token =
+        getState().auth.userToken ?? getState().auth?.userInfo?.data?.token;
 
       if (token) {
         headers.set("authorization", `Bearer ${token}`);
-        return headers;
       }
+
+      return headers;
     },
   }),
   endpoints: (build) => ({
@@ -22,8 +23,17 @@ export const authApi = createApi({
         method: "GET",
       }),
     }),
+    login: build.mutation({
+      query: ({ username, password }) => ({
+        url: "auth/login",
+        method: "POST",
+        body: { username, password },
+      }),
+      invalidates: ["getDetails"], // invalidate getDetails query when user logs in
+    }),
   }),
 });
 
-// export react hook
+// export react hooks
 export const { useGetDetailsQuery } = authApi;
+export const { useLoginMutation } = authApi;

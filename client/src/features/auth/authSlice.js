@@ -33,6 +33,9 @@ const authSlice = createSlice({
       state.success = null;
       state.loading = false;
     },
+    setToken: (state, { payload }) => {
+      state.userToken = payload;
+    },
   },
   extraReducers: {
     [userLogin.pending]: (state) => {
@@ -40,7 +43,6 @@ const authSlice = createSlice({
       state.error = null;
     },
     [userLogin.fulfilled]: (state, { payload }) => {
-      console.log(payload);
       state.loading = false;
       state.userInfo = payload;
       state.logged = true;
@@ -104,6 +106,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { logout } = authSlice.actions;
+export const { logout, setToken } = authSlice.actions;
 
 export default authSlice.reducer;

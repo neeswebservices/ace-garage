@@ -27,6 +27,7 @@ import EmployeeRoute from "./routes/employeeRoute";
 import Contact from "./components/Contact";
 import Service from "./components/Service";
 import ServiceList from "./components/ServiceList";
+import { userLogin } from "./features/auth/authAction";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,61 +35,60 @@ function App() {
     (state) => state.auth
   );
 
-  const { data, isFetching } = useGetDetailsQuery("userDetails", {
-    pollingInterval: 900000, // 15 minutes
+  const { data, isFetching, refetch } = useGetDetailsQuery("userDetails", {
+    pollingInterval: 1000,
   });
-
-  console.log(data);
 
   useEffect(() => {
     if (data && !isFetching) {
       dispatch(setCredentials(data.data));
     }
+    refetch();
   }, [data, dispatch, userToken, logged, loading]);
 
   return (
-    <Router>
-      <Routes>
-        <Route exact path="/" element={<HomePage />}></Route>
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/services" element={<ServiceList />} />
-        <Route path="/single-service" element={<Service />} />
+    <>
+      <Router>
+        <Routes>
+          <Route exact path="/" element={<HomePage />}></Route>
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/services" element={<ServiceList />} />
+          <Route path="/single-service" element={<Service />} />
 
-        <Route element={<Protected />}>
-          <Route path="/appointment" element={<AppointmentNavbar />} />
-        </Route>
-
-        {/* Admin */}
-
-        <Route element={<AdminRoute />}>
-          <Route path="/admin" element={<Layout />}>
-            <Route index element={<Dashboard />} />
-            <Route path="/admin/branch" element={<CreateBranch />} />
-            <Route path="/admin/totalusers" element={<TotalUser />} />
-            <Route path="/admin/totalemployee" element={<TotalEmployee />} />
-            <Route path="/admin/category" element={<CreateCategory />} />
-            <Route path="/admin/totalproducts" element={<TotalProduct />} />
+          <Route element={<Protected />}>
+            <Route path="/appointment" element={<AppointmentNavbar />} />
           </Route>
-        </Route>
 
-        {/* Employee*/}
-        <Route element={<EmployeeRoute />}>
-          <Route path="/employee" element={<EmployeeLayout />}>
-            <Route index element={<Dashboard />} />
-            <Route path="/employee/addservice" element={<CreateService />} />
-            <Route
-              path="/employee/createsparepart"
-              element={<CreateSparePart />}
-            />
-            <Route path="/employee/appointment" element={<Appointment />} />
-            <Route path="/employee/report" element={<Report />} />
+          {/* Admin */}
+          <Route element={<AdminRoute />}>
+            <Route path="/admin" element={<Layout />}>
+              <Route index element={<Dashboard />} />
+              <Route path="/admin/branch" element={<CreateBranch />} />
+              <Route path="/admin/totalusers" element={<TotalUser />} />
+              <Route path="/admin/totalemployee" element={<TotalEmployee />} />
+              <Route path="/admin/category" element={<CreateCategory />} />
+              <Route path="/admin/totalproducts" element={<TotalProduct />} />
+            </Route>
           </Route>
-        </Route>
-      </Routes>
-    </Router>
+          {/* Employee*/}
+          <Route element={<EmployeeRoute />}>
+            <Route path="/employee" element={<EmployeeLayout />}>
+              <Route index element={<Dashboard />} />
+              <Route path="/employee/addservice" element={<CreateService />} />
+              <Route
+                path="/employee/createsparepart"
+                element={<CreateSparePart />}
+              />
+              <Route path="/employee/appointment" element={<Appointment />} />
+              <Route path="/employee/report" element={<Report />} />
+            </Route>
+          </Route>
+        </Routes>
+      </Router>
+    </>
   );
 }
 

@@ -18,8 +18,8 @@ const Navbar = () => {
   };
 
   const handleLogout = () => {
-    dispatch(removeCredentials());
     dispatch(logout());
+    dispatch(removeCredentials());
     navigate("/");
   };
 
