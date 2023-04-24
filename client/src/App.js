@@ -26,7 +26,8 @@ import AdminRoute from "./routes/adminRoute";
 import EmployeeRoute from "./routes/employeeRoute";
 import Contact from "./components/Contact";
 import Service from "./components/Service";
-import ServiceList from "./components/ServiceList";
+import ServiceList from "./components/SpareParts";
+import SpareParts from "./components/SpareParts";
 
 function App() {
   const dispatch = useDispatch();
@@ -54,7 +55,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/services" element={<ServiceList />} />
+        <Route path="/spareparts" element={<SpareParts />} />
         <Route path="/single-service" element={<Service />} />
 
         <Route element={<Protected />}>
