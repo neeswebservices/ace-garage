@@ -5,6 +5,7 @@ import {
   createCategory,
   createEmployee,
   createFAQ,
+  createUser,
   getBranches,
   getEmployee,
   getUser,
@@ -17,9 +18,11 @@ adminRouter.post("/branch", createBranch);
 adminRouter.post("/breakdown", createBreakdown);
 adminRouter.post("/faq", createFAQ);
 adminRouter.post("/employee", createEmployee);
+adminRouter.post("/user", createUser);
 
 adminRouter.get("/users", getUser);
 adminRouter.get("/employees", getEmployee);
 adminRouter.get("/branch", getBranches);
 
 export default adminRouter;
+createUser;

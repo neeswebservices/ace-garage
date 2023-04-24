@@ -45,6 +45,19 @@ export const createEmployee = tryCatch(async (req, res, next) => {
   return res.send(new HttpResponse("Employee Created", 200));
 });
 
+export const createUser = tryCatch(async (req, res, next) => {
+  const user = req.query.user || req.body.user;
+
+  if (!user) throw new APPError("User Invalid", 400);
+
+  await User.findByIdAndUpdate(
+    user,
+    { role: 0 },
+    { new: true, select: "role" }
+  );
+  return res.send(new HttpResponse("Employee moved to user!", 200));
+});
+
 export const createFAQ = tryCatch(async (req, res, next) => {
   const { title, desc } = req.body;
 

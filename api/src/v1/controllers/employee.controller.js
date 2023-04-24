@@ -1,10 +1,11 @@
 import Service from "../models/service.model.js";
 import { HttpResponse } from "../utils/HttpResponse.js";
 import tryCatch from "../utils/tryCatch.js";
+import address from "address";
 
 export const createService = tryCatch(async (req, res, next) => {
-  const { category } = req.params;
-  const { name, desc, price, branch } = req.body;
+  const { name, desc, price, branch, category } = req.body;
+  console.log(req.body);
 
   const image = req?.file;
 
@@ -21,8 +22,7 @@ export const createService = tryCatch(async (req, res, next) => {
     const imageURL = `http://${address.ip()}:${process.env.PORT}/${
       req.file.path
     }`;
-    console.log(imageURL);
-    spare.image = imageURL;
+    service.image = imageURL;
   }
 
   await service.save();

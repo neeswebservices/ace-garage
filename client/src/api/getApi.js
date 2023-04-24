@@ -5,6 +5,7 @@ const getAPI = {
   getUsers: (params) => getClient.get("admin/users", params),
   getBranches: (params) => getClient.get("get/branch", params),
   getEmployee: (params) => getClient.get("admin/employees", params),
+  getSpare: (params) => getClient.get("get/spare", params),
 };
 
 export default getAPI;

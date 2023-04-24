@@ -6,6 +6,8 @@ const adminAPI = {
   createBranch: (params) => axiosClient.post("admin/branch", params),
   getCategory: (params) => axiosClient.get("get/category", params),
   getUsers: (params) => axiosClient.get("get/users", params),
+  createEmployee: (params) => axiosClient.post("admin/employee", params),
+  createUser: (params) => axiosClient.post("admin/user", params),
 };
 
 export default adminAPI;
