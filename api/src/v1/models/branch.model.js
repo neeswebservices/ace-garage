@@ -17,16 +17,14 @@ const branchSchema = new mongoose.Schema({
   },
   city: {
     type: String,
-    default: "Nepal",
+    default: "Kathmandu",
   },
   state: {
     type: String,
   },
   country: {
     type: String,
-  },
-  zipCode: {
-    type: String,
+    default: "Nepal"
   },
   openingHours: [
     {
