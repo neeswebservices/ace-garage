@@ -18,6 +18,7 @@ const bookingSchema = new mongoose.Schema({
     enum: ["pending", "confirmed", "completed", "cancelled"],
     default: "pending",
   },
+  address: String,
 });
 
 const Booking = mongoose.model("Booking", bookingSchema);
