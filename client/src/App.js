@@ -29,6 +29,7 @@ import Service from "./components/Service";
 import { userLogin } from "./features/auth/authAction";
 import ServiceList from "./components/SpareParts";
 import SpareParts from "./components/SpareParts";
+import Sparepart from "./components/Sparepart";
 
 function App() {
   const dispatch = useDispatch();
@@ -56,6 +57,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/spareparts" element={<SpareParts />} />
+        <Route path="/single-sparepart" element={<Sparepart />} />
         <Route path="/single-service" element={<Service />} />
 
         <Route element={<Protected />}>

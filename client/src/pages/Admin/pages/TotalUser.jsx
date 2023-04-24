@@ -26,6 +26,7 @@ function TotalUser() {
           Refresh
         </button>
       </div>
+
       <div className="flex-grow px-4 py-6 overflow-auto">
         <table className="w-full border-collapse">
           <thead>
