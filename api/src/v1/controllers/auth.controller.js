@@ -140,7 +140,7 @@ export const authRegister = async (req, res, next) => {
     })
       .then((msg) => {
         return res.send(
-          new HttpResponse("User registered successfully !", 200)
+          new HttpResponse("User registered successfully, Login now !", 200)
         );
       })
       .catch((err) => {

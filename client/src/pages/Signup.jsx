@@ -2,16 +2,27 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useQuery } from "@tanstack/react-query";
 import authAPI from "../api/authApi.js";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
 
 export const Signup = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { register, handleSubmit, reset } = useForm();
 
   const submitForm = async (data) => {
     const { address, cpassword, email, name, password, phone, username } = data;
 
-    if (!address || !cpassword || !email || !name || !password || !phone || !username) {
+    if (
+      !address ||
+      !cpassword ||
+      !email ||
+      !name ||
+      !password ||
+      !phone ||
+      !username
+    ) {
       return toast.error("Please fill in all fields");
     }
 
@@ -19,6 +30,12 @@ export const Signup = () => {
       return toast.error("Password do not matched!");
     }
     const dataa = await authAPI.signup({ ...data });
+    console.log(dataa);
+
+    if (dataa.success) {
+      navigate("/login");
+      reset();
+    }
   };
 
   return (
@@ -36,12 +53,17 @@ export const Signup = () => {
         </div>
         <div className="flex  items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
           <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md">
-            <h2 className="text-3xl font-bold leading-tight text-black dark:text-white sm:text-4xl">Sign Up</h2>
+            <h2 className="text-3xl font-bold leading-tight text-black dark:text-white sm:text-4xl">
+              Sign Up
+            </h2>
 
             <form onSubmit={handleSubmit(submitForm)} className="mt-2">
               <div className="space-y-5">
                 <div>
-                  <label htmlFor="name" className="text-base font-medium text-gray-900 dark:text-gray-200">
+                  <label
+                    htmlFor="name"
+                    className="text-base font-medium text-gray-900 dark:text-gray-200"
+                  >
                     {" "}
                     Full Name{" "}
                   </label>
@@ -56,7 +78,10 @@ export const Signup = () => {
                   </div>
                 </div>
                 <div>
-                  <label htmlFor="email" className="text-base font-medium text-gray-900 dark:text-gray-200">
+                  <label
+                    htmlFor="email"
+                    className="text-base font-medium text-gray-900 dark:text-gray-200"
+                  >
                     {" "}
                     Username{" "}
                   </label>
@@ -71,7 +96,10 @@ export const Signup = () => {
                   </div>
                 </div>
                 <div>
-                  <label htmlFor="email" className="text-base font-medium text-gray-900 dark:text-gray-200">
+                  <label
+                    htmlFor="email"
+                    className="text-base font-medium text-gray-900 dark:text-gray-200"
+                  >
                     {" "}
                     Email address{" "}
                   </label>
@@ -87,7 +115,10 @@ export const Signup = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="text-base font-medium text-gray-900 dark:text-gray-200">
+                  <label
+                    htmlFor="email"
+                    className="text-base font-medium text-gray-900 dark:text-gray-200"
+                  >
                     {" "}
                     Phone Number{" "}
                   </label>
@@ -102,7 +133,10 @@ export const Signup = () => {
                   </div>
                 </div>
                 <div>
-                  <label htmlFor="email" className="text-base font-medium text-gray-900 dark:text-gray-200">
+                  <label
+                    htmlFor="email"
+                    className="text-base font-medium text-gray-900 dark:text-gray-200"
+                  >
                     Address{" "}
                   </label>
                   <div className="mt-2.5">
@@ -116,7 +150,10 @@ export const Signup = () => {
                   </div>
                 </div>
                 <div>
-                  <label htmlFor="password" className="text-base font-medium text-gray-900 dark:text-gray-200">
+                  <label
+                    htmlFor="password"
+                    className="text-base font-medium text-gray-900 dark:text-gray-200"
+                  >
                     {" "}
                     Password{" "}
                   </label>
@@ -131,7 +168,10 @@ export const Signup = () => {
                   </div>
                 </div>
                 <div>
-                  <label htmlFor="password" className="text-base font-medium text-gray-900 dark:text-gray-200">
+                  <label
+                    htmlFor="password"
+                    className="text-base font-medium text-gray-900 dark:text-gray-200"
+                  >
                     Confirm Password
                   </label>
                   <div className="mt-2.5">
@@ -159,7 +199,11 @@ export const Signup = () => {
                       stroke="currentColor"
                       className="ml-2 h-4 w-4"
                     >
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
+                      />
                     </svg>
                   </button>
                 </div>
@@ -169,8 +213,15 @@ export const Signup = () => {
             <div className="mt-3 space-y-3">
               <p>
                 <span className="text-sm text-gray-500 dark:text-gray-400">
-                  Read our <span className="capitalize text-indigo-600">privacy policy</span> and{" "}
-                  <span className="capitalize text-indigo-600">terms of service</span> to learn more
+                  Read our{" "}
+                  <span className="capitalize text-indigo-600">
+                    privacy policy
+                  </span>{" "}
+                  and{" "}
+                  <span className="capitalize text-indigo-600">
+                    terms of service
+                  </span>{" "}
+                  to learn more
                 </span>
               </p>
             </div>

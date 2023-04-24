@@ -4,7 +4,7 @@ export class HttpResponse {
   constructor(message, statusCode = HttpStatusCode.Ok, data, status) {
     this.statusCode = statusCode;
     this.message = message;
-    this.status = true;
+    this.success = true;
     data && (this.data = data);
     // status && (this.status = status);
   }

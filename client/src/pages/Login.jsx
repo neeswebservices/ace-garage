@@ -13,6 +13,8 @@ import { userLogin } from "../features/auth/authAction";
 
 export const Login = ({}) => {
   const queryClient = useQueryClient();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   // const { register, handleSubmit, reset } = useForm();
   // const { isLoading, isError, error, data, isSuccess, mutate } = useLogin();
 
@@ -34,9 +36,6 @@ export const Login = ({}) => {
   //     pollingInterval: 900000,
   // });
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
   const { register, handleSubmit, reset } = useForm();
 
   useEffect(() => {
@@ -45,6 +44,7 @@ export const Login = ({}) => {
 
   const submitForm = (data) => {
     dispatch(userLogin(data));
+    navigate("/");
   };
 
   return (
