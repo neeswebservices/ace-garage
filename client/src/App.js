@@ -16,6 +16,9 @@ import CreateSparePart from './pages/Employee/pages/CreateSparePart'
 import Appointment from './pages/Employee/pages/Appointment'
 import Report from './pages/Employee/pages/Report'
 import AppointmentNavbar from './pages/AppointmentNavbar'
+import Contact from './component/Contact'
+import ServiceList from './component/ServiceList'
+import Service from './component/Service'
 
 
 
@@ -28,6 +31,11 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/appointment" element={<AppointmentNavbar />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/services" element={<ServiceList />} />
+        <Route path="/single-service" element={<Service />} />
+
+
 
 
         {/* Admin */}
