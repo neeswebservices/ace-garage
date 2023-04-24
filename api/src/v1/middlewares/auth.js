@@ -2,19 +2,21 @@ import { createError } from "../config/createError.js";
 import jwt from "jsonwebtoken";
 import User from "../models/user.model.js";
 import ROLE from "../enums/roles.enum.js";
+import APPError from "../utils/Error.js";
+import tryCatch from "../utils/tryCatch.js";
 
-export const Auth = async (req, res, next) => {
-  let token = req.headers.authorization || req.cookies.accesstoken;
+export const Auth = tryCatch(async (req, res, next) => {
+  let token = req.headers?.authorization || req.cookies?.accesstoken;
   if (!token) {
     return next(createError("Unauthorized | Please login to continue !", 403));
   }
-  try {
-    if (token.includes(" ")) {
-      token = token.split(" ")[1];
-      jwt.verify(token, process.env.SECRETTOKEN, async (err, res) => {
-        if (err) {
-          throw err;
-        }
+  if (token.includes(" ")) {
+    token = token.split(" ")[1];
+    jwt.verify(token, process.env.SECRETTOKEN, async (err, res) => {
+      if (err) {
+        // throw new APPError("Invalid Authentication", 403);
+        return res.statusCode(403).send({ success: false });
+      } else {
         const role = await User.findById(res.id).select("role");
         if (role == null) {
           return next(createError("Unauthorized !", 403));
@@ -22,12 +24,15 @@ export const Auth = async (req, res, next) => {
         req.user = res.id;
         req.role = role.role;
         next();
-      });
-    } else if (!token.includes(" ")) {
-      jwt.verify(token, process.env.SECRETTOKEN, async (err, res) => {
-        if (err) {
-          throw err;
-        }
+      }
+    });
+  } else if (!token.includes(" ")) {
+    jwt.verify(token, process.env.SECRETTOKEN, async (err, res) => {
+      if (err) {
+        return res.statusCode(403).send({ success: false });
+
+        // throw new APPError("Invalid Authentication", 403);
+      } else {
         const role = await User.findById(res.id).select("role");
         if (role == null) {
           return next(createError("Unauthorized !", 403));
@@ -35,15 +40,12 @@ export const Auth = async (req, res, next) => {
         req.user = res.id;
         req.role = role.role;
         next();
-      });
-    } else {
-      return res.send(400).json({ message: "Invalid token authorization!" });
-    }
-  } catch (error) {
-    console.log(error.message);
-    return next(error);
+      }
+    });
+  } else {
+    return res.send(400).json({ message: "Invalid token authorization!" });
   }
-};
+});
 
 export const verifyCustomerAsWellAsAdmin = async () => {
   try {

@@ -10,13 +10,13 @@
     "react": "cd client; npm start",
     "node": "cd api; npm run dev",
     "dev": "concurrently \"npm run react\" \"npm run node\"",
+    "prod": "cd api && node --watch ./bin/www.js",
     "install": "cd client && ni && cd ../api && ni"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@vonage/server-sdk": "^3.3.0",
     "concurrently": "^8.0.1"
   }
 }

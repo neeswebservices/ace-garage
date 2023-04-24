@@ -4,8 +4,9 @@ export class HttpResponse {
   constructor(message, statusCode = HttpStatusCode.Ok, data, status) {
     this.statusCode = statusCode;
     this.message = message;
+    this.status = true;
     data && (this.data = data);
-    status && (this.status = status);
+    // status && (this.status = status);
   }
 
   toJson() {

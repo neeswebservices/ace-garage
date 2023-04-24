@@ -2,14 +2,11 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <>
-      <footer className="container mx-auto py-10 px-14 md:px-0">
-        
-        <div className="mt-16 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+    <div className="">
+      <footer className="container py-10 px-14 m-auto">
+        <div className="mt-16 mb-20 grid grid-cols-2  md:grid-cols-3 lg:grid-cols-5 place-items-center">
           <div className="mb-8 lg:mb-0">
-            <p className="text-lg font-semibold text-gray-700 dark:text-gray-100 mb-6">
-              Company
-            </p>
+            <p className="text-lg font-semibold text-gray-700 dark:text-gray-100 mb-6">Company</p>
             <ul className="flex flex-col space-y-4 font-medium text-[14px] text-gray-500 dark:text-gray-400">
               <li>About us</li>
               <li>Company History</li>
@@ -19,9 +16,7 @@ const Footer = () => {
             </ul>
           </div>
           <div className="mb-8 lg:mb-0">
-            <p className="text-lg font-semibold text-gray-700 dark:text-gray-100 mb-6">
-              Our Stores
-            </p>
+            <p className="text-lg font-semibold text-gray-700 dark:text-gray-100 mb-6">Our Stores</p>
             <ul className="flex flex-col space-y-4 font-medium text-[14px] text-gray-500 dark:text-gray-400">
               <li>Washington</li>
               <li>New Hampshire</li>
@@ -31,9 +26,7 @@ const Footer = () => {
             </ul>
           </div>
           <div className="mb-8 lg:mb-0">
-            <p className="text-lg font-semibold text-gray-700 dark:text-gray-100 mb-6">
-              Services
-            </p>
+            <p className="text-lg font-semibold text-gray-700 dark:text-gray-100 mb-6">Services</p>
             <ul className="flex flex-col space-y-4 font-medium text-[14px] text-gray-500 dark:text-gray-400">
               <li>UI / UX Design</li>
               <li>App Development</li>
@@ -43,9 +36,7 @@ const Footer = () => {
             </ul>
           </div>
           <div className="mb-8 lg:mb-0">
-            <p className="text-lg font-semibold text-gray-700 dark:text-gray-100 mb-6">
-              Legal
-            </p>
+            <p className="text-lg font-semibold text-gray-700 dark:text-gray-100 mb-6">Legal</p>
             <ul className="flex flex-col space-y-4 font-medium text-[14px] text-gray-500 dark:text-gray-400">
               <li>Privacy Policy</li>
               <li>Terms of Service</li>
@@ -55,9 +46,7 @@ const Footer = () => {
             </ul>
           </div>
           <div className="mb-8 lg:mb-0">
-            <p className="text-lg font-semibold text-gray-700 dark:text-gray-100 mb-6">
-              Social Links
-            </p>
+            <p className="text-lg font-semibold text-gray-700 dark:text-gray-100 mb-6">Social Links</p>
             <ul className="flex flex-col space-y-4 font-medium text-[14px] text-gray-500 dark:text-gray-400">
               <li>Facebook</li>
               <li>Twitter</li>
@@ -68,7 +57,7 @@ const Footer = () => {
           </div>
         </div>
       </footer>
-    </>
+    </div>
   );
 };
 

@@ -1,7 +1,7 @@
 import React from "react";
-import Navbar from "../component/Navbar";
-import Hero from "../component/Hero";
-import Footer from "../component/Footer";
+import Navbar from "../components/Navbar";
+import Hero from "../components/Hero";
+import Footer from "../components/Footer";
 
 const HomePage = () => {
   return (

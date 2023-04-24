@@ -17,6 +17,8 @@ import sendOTP from "../services/otp.js";
 import { generateRandom4DigitNumber } from "../services/generator.js";
 import getPhoneCode from "../services/getPhoneCode.js";
 import sendSMS from "../services/vonage.js";
+import tryCatch from "../utils/tryCatch.js";
+import { HttpResponse } from "../utils/HttpResponse.js";
 
 // config of sendgrid to send mail
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
@@ -28,6 +30,7 @@ export const authRegister = async (req, res, next) => {
     const password = sanitize(req.body.password);
     const address = sanitize(req.body.address);
     const phone = sanitize(req.body.phone);
+    const name = sanitize(req.body.name);
 
     console.log(req.location);
 
@@ -38,22 +41,20 @@ export const authRegister = async (req, res, next) => {
     });
 
     if (userExist) {
-      return res.status(403).json({
-        msg: "Email or Username is already taken ! Try using another.",
-      });
+      throw new APPError("Email or username already taken please chooose another !", 403);
     }
     if (username.length <= 6 || username.length > 15)
       return res.status(400).json({
-        msg: "Username's character must be between 6 and 15 !",
+        message: "Username's character must be between 6 and 15 !",
       });
     if (!validateUsername(username))
       return res.status(400).json({
-        msg: "Username should be alphanumeric and not contain special characters !",
+        message: "Username should be alphanumeric and not contain special characters !",
       });
-    if (!validateEmail(email)) return res.status(400).json({ msg: "Email address should be valid!" });
+    if (!validateEmail(email)) return res.status(400).json({ message: "Email address should be valid!" });
     if (!validatePassword(password)) {
       return res.status(400).json({
-        msg: "Password must contain one uppercase, symbol, number, and atleast 8 characters !",
+        message: "Password must contain one uppercase, symbol, number, and atleast 8 characters !",
       });
     }
 
@@ -118,33 +119,27 @@ export const authRegister = async (req, res, next) => {
       address,
       password,
       phone,
+      ...(name && name),
     })
       .then((msg) => {
-        return res.status(201).send({ msg: "User successfully activated !" });
+        return res.send(new HttpResponse("User registered successfully !", 200));
       })
       .catch((err) => {
         console.log(err);
-        return res.status(400).send({
-          msg: "Failed to Activate user, Try again !",
-        });
+        throw new APPError("Failed to Activate user, Try again !", 500);
       });
   } catch (err) {
     next(err);
   }
 };
 
-export const userDetails = async (req, res, next) => {
-  try {
-    if (!req.user) return res.status(400).send({ msg: "User unauthorized" });
+export const userDetails = tryCatch(async (req, res, next) => {
+  if (!req.user) return res.status(400).send({ msg: "User unauthorized" });
 
-    const { _doc } = await User.findById(req.user);
+  const { _doc } = await User.findById(req.user);
 
-    return res.send({ ..._doc, role: req.role });
-  } catch (error) {
-    console.log(error);
-    return res.status(500).json({ msg: "Invalid or token expired !" });
-  }
-};
+  return res.send({ ..._doc, role: req.role });
+});
 
 export const authActivate = async (req, res, next) => {
   const { token } = req.params || req.body || req.headers["token"];
@@ -181,35 +176,31 @@ export const authActivate = async (req, res, next) => {
   }
 };
 
-export const verifyLogin = async (req, res, next) => {
-  try {
-    const { emailorusername, password } = req.body;
+export const verifyLogin = tryCatch(async (req, res, next) => {
+  const { emailorusername, password } = req.body;
 
-    if (!emailorusername) return next(createError("Please enter your Email or Username.", 400));
+  if (!emailorusername) return next(createError("Please enter your Email or Username.", 400));
 
-    if (!password) return next(createError("Please submit your Password.", 400));
+  if (!password) return next(createError("Please submit your Password.", 400));
 
-    const user = await User.findOne({
-      $or: [{ email: emailorusername }, { username: emailorusername }],
-    }).select("+password");
+  const user = await User.findOne({
+    $or: [{ email: emailorusername }, { username: emailorusername }],
+  }).select("+password");
 
-    if (!user) return next(createError("User doesn't exists, Please register   !", 403));
+  if (!user) throw new APPError("User doesn't exists!", 404);
 
-    if (user && (await bcrypt.compare(password, user.password))) {
-      let token = jwt.sign({ id: user._id }, process.env.SECRETTOKEN);
-      // const accesstoken = `Bearer ${token}`;
+  if (user && (await bcrypt.compare(password, user.password))) {
+    let token = jwt.sign({ id: user._id }, process.env.SECRETTOKEN);
+    // const accesstoken = `Bearer ${token}`;
 
-      res.cookie("accesstoken", token);
+    res.cookie("accesstoken", token);
 
-      return res.status(200).send({ token });
-    } else {
-      res.clearCookie("accesstoken");
-      return next(createError("Invalid Credentials!", 403));
-    }
-  } catch (err) {
-    return next(createError(err.message, 500, err.stack));
+    return res.send(new HttpResponse("User Logged in", 200, { token }));
+  } else {
+    res.clearCookie("accesstoken");
+    throw new APPError("Invalid credentials!", 403);
   }
-};
+});
 
 export const logout = async (req, res, next) => {
   try {
@@ -221,14 +212,13 @@ export const logout = async (req, res, next) => {
 };
 
 export const checkLogin = asyncHandler(async (req, res, next) => {
-  console.log(req.user);
-
   if (req.user) {
     const user = await User.findById(req.user);
-    return res.status(200).send({ user, status: true, msg: "User is logged" });
+    // return res.status(200).send({ user, status: true, msg: "User is logged" });
+    return res.send(new HttpResponse("User", 200, user));
   }
 
-  return next(createError("User not logged in !", 400));
+  throw new APPError("User not logged in !", 400);
 });
 
 export const forgotPassword = asyncHandler(async (req, res, next) => {

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import Footer from "../component/Footer";
-import Navbar from "../component/Navbar";
+import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
 import axios from "axios";
 
 const ApppointmentNavbar = () => {
@@ -107,16 +107,8 @@ const ApppointmentNavbar = () => {
 
               <span>
                 {" "}
-                <input
-                  type="checkbox"
-                  onChange={(e) => setTicked((prev) => !prev)}
-                  name="pick"
-                  id="pick"
-                />{" "}
-                <label htmlFor="pick">
-                  {" "}
-                  Do you want pickup and drop service?
-                </label>{" "}
+                <input type="checkbox" onChange={(e) => setTicked((prev) => !prev)} name="pick" id="pick" />{" "}
+                <label htmlFor="pick"> Do you want pickup and drop service?</label>{" "}
               </span>
               {ticked && (
                 <input
@@ -127,10 +119,7 @@ const ApppointmentNavbar = () => {
                   placeholder="Bhatbhateni, Koteshwor"
                 />
               )}
-              <button
-                type="submit"
-                className="bg-blue-600 py-2 px-10 w-fit text-white rounded-md cursor-pointerr"
-              >
+              <button type="submit" className="bg-blue-600 py-2 px-10 w-fit text-white rounded-md cursor-pointerr">
                 Request Appointment
               </button>
             </div>

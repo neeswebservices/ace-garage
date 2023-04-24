@@ -19,10 +19,30 @@ export const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 app.use(logger(":url with :method from :remote-addr :remote-user :response-time ms"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(cors({ origin: "*" }));
+
+app.use(
+  cookieParser({
+    secure: false,
+    httpOnly: false,
+    // sameSite: "none",
+  })
+);
+
+app.use(
+  cors({
+    origin: "*",
+    // credentials: true,
+  })
+);
+
 app.use(express.static(path.join(__dirname, "./src/v1/public/*")));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
+app.use((req, res, next) => {
+  // Set the Access-Control-Allow-Credentials header
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+  next();
+});
 
 // Routes configurations
 
