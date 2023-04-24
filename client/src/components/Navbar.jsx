@@ -49,7 +49,7 @@ const Navbar = () => {
         )}
         {employee === true && logged === true && (
           <Link to="/employee" className="p-4">
-            employee
+            Employee
           </Link>
         )}
 
