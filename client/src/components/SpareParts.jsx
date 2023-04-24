@@ -23,8 +23,7 @@ const SpareParts = () => {
     {
       id: 1,
       name: "Clutch 2x",
-      description:
-        "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+      description: "",
       price: 1099,
       image:
         "https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1024,h_577/https://backbiker.com/wp-content/uploads/2022/09/Bicycle-driverain-1024x577.png",
