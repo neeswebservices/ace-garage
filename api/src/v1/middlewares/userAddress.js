@@ -6,7 +6,8 @@ const TTL = 900000; // 15 minutes
 
 const getUserLocation = async (req, res, next) => {
   try {
-    const ipAddress = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
+    const ipAddress =
+      req.headers["x-forwarded-for"] || req.connection.remoteAddress;
     // console.log(req.ip);
     // console.log(req.ips);
 
@@ -17,7 +18,9 @@ const getUserLocation = async (req, res, next) => {
     }
     const publicIpResponse = await axios.get("https://api.ipify.org");
 
-    const response = await axios.get(`https://ipinfo.io/${publicIpResponse.data}?token=${process.env.IP_INFO_TOKEN}`);
+    const response = await axios.get(
+      `https://ipinfo.io/${publicIpResponse.data}?token=${process.env.IP_INFO_TOKEN}`
+    );
 
     req.location = { ...response.data };
 

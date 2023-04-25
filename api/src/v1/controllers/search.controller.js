@@ -91,9 +91,10 @@ export const searchDynamic = tryCatch(async (req, res, next) => {
 
 export const singleService = tryCatch(async (req, res, next) => {
   const { id } = req.body;
-  return res.send(
-    new HttpResponse("Service details", 200, await Service.findById(id))
-  );
+  const service = await Service.findOne({ _id: id })
+    .populate("branch")
+    .populate("category");
+  return res.send(new HttpResponse("Service details", 200, service));
 });
 
 export const singleSpare = tryCatch(async (req, res, next) => {

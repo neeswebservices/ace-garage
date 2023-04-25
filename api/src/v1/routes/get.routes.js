@@ -36,7 +36,7 @@ getRouter.post("/appointment/delete", Auth, verfiyEmployee, deleteAppointment);
 getRouter.post("/category/delete", Auth, verifyAdmin, deleteCategory);
 
 getRouter.post("/searched", searchDynamic);
-getRouter.get("/singleservice", singleService);
-getRouter.get("/singlespare", singleSpare);
+getRouter.post("/singleservice", singleService);
+getRouter.post("/singlespare", singleSpare);
 
 export default getRouter;

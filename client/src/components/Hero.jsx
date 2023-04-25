@@ -20,7 +20,7 @@ export const Hero = () => {
     ? data.data.reduce((acc, cur) => {
         acc.push({
           value: cur._id,
-          label: `${cur.city}, ${cur.address}`,
+          label: `${cur.city} ${cur.address}`,
           ...cur,
         });
         return acc;

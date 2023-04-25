@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import getAPI from "../api/getApi";
+import { Link } from "react-router-dom";
+import Spinner from "./common/Spinner";
 
 const ServiceList = () => {
   const {
@@ -10,6 +12,11 @@ const ServiceList = () => {
     error,
     refetch,
   } = useQuery(["service"], () => getAPI.getService());
+  console.log(products);
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <>
@@ -20,9 +27,10 @@ const ServiceList = () => {
         {/* Service List */}
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 ">
           <div className="flex flex-wrap -mx-4">
-            {products?.data?.map((product, index) => (
-              <div
-                key={product._id}
+            {Array.from(products?.data).map((product, index) => (
+              <Link
+                to={`service/${product?._id}`}
+                key={index}
                 className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4"
               >
                 <div className="bg-white rounded-sm shadow-md overflow-hidden">
@@ -44,7 +52,7 @@ const ServiceList = () => {
                     </button>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

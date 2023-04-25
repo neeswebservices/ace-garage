@@ -13,7 +13,7 @@ const getAPI = {
     getClient.post("get/appointment/delete", params),
   deleteCategory: (params) => getClient.post("get/category/delete", params),
   searched: (params) => getClient.post(`get/searched`, params),
-  getSingleService: (params) => getClient.get("get/singleservice", params),
+  getSingleService: (params) => getClient.post("get/singleservice", params),
   getSingleSpare: (params) => getClient.get("get/singlespare", params),
 };
 

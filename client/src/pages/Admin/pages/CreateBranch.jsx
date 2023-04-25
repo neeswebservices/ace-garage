@@ -15,7 +15,7 @@ const CreateBranch = () => {
   const submitForm = async (data) => {
     const res = await adminAPI.createBranch({ ...data });
 
-    if (res?.status) {
+    if (res?.success) {
       reset();
       queryClient.invalidateQueries("branch");
     }

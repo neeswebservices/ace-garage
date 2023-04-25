@@ -64,7 +64,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/spareparts" element={<SpareParts />} />
         <Route path="/single-sparepart" element={<Sparepart />} />
-        <Route path="/single-service" element={<Service />} />
+        <Route path="/service/:id" element={<Service />} />
         <Route path="/search/:id" element={<SearchPage />} />
 
         <Route element={<Protected />}>

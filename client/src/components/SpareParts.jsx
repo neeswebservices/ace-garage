@@ -15,6 +15,8 @@ const SpareParts = () => {
     refetch,
   } = useQuery(["spare"], () => getAPI.getSpare());
 
+  function handleAddToCart() {}
+
   return (
     <>
       <Navbar />
