@@ -1,11 +1,16 @@
 import mongoose from "mongoose";
 
 const schema = new mongoose.Schema({
+  name: { type: String },
   user: { type: mongoose.Schema.Types.ObjectId, required: true, ref: "User" },
-  category: { type: mongoose.Schema.Types.ObjectId, required: true, ref: "Category" },
+  category: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: "Category",
+  },
   date: { type: Date, required: true },
-  details: { type: String, required: true },
-  address: { type: String, required: true },
+  details: { type: String },
+  address: { type: String },
   status: { type: Boolean, default: false },
 });
 

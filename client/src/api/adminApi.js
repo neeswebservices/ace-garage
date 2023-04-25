@@ -8,6 +8,7 @@ const adminAPI = {
   getUsers: (params) => axiosClient.get("get/users", params),
   createEmployee: (params) => axiosClient.post("admin/employee", params),
   createUser: (params) => axiosClient.post("admin/user", params),
+  createAppointment: (params) => axiosClient.post("spare/announcement", params),
 };
 
 export default adminAPI;

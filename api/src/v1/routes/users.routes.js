@@ -1,5 +1,11 @@
 import { Router } from "express";
-import { getAllUsers, getAllVendors, requestVendor, updateProfile, updateUser } from "../controllers/user.controller.js";
+import {
+  getAllUsers,
+  getAllVendors,
+  requestVendor,
+  updateProfile,
+  updateUser,
+} from "../controllers/user.controller.js";
 import { verifyAdmin, Auth } from "../middlewares/auth.js";
 import { upload } from "../middlewares/uploadImage.js";
 

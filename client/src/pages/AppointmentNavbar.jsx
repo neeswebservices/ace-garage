@@ -1,9 +1,23 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import axios from "axios";
+import Spinner from "../components/common/Spinner";
+import { useForm } from "react-hook-form";
+import { useQuery } from "@tanstack/react-query";
+import getAPI from "../api/getApi";
+import adminAPI from "../api/adminApi";
+import { useNavigate } from "react-router-dom";
 
 const ApppointmentNavbar = () => {
+  const navigate = useNavigate();
+  const { register, handleSubmit, reset } = useForm();
+  const { data: category, isLoading: catLoading } = useQuery(["category"], () =>
+    getAPI.getCategory()
+  );
+
+  const inputRef = useRef();
+
   const [ticked, setTicked] = useState(false);
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
@@ -47,6 +61,21 @@ const ApppointmentNavbar = () => {
     }
   }, [latitude, longitude]);
 
+  const submitForm = async (data) => {
+    ticked && (data.address = inputRef.current?.value);
+    const res = await adminAPI.createAppointment({ ...data });
+    console.log(data);
+
+    if (res?.success) {
+      reset();
+      navigate("/");
+    }
+  };
+
+  function handleChange() {
+    setTicked((prev) => !prev);
+  }
+
   return (
     <>
       <Navbar />
@@ -61,12 +90,13 @@ const ApppointmentNavbar = () => {
           ></iframe>
         </div>
         <div className="flex-1">
-          <div className=" border p-14">
+          <form onSubmit={handleSubmit(submitForm)} className=" border p-14">
             <div className="grid grid-cols-1 gap-6">
               <label className="block">
                 <span className="text-black">Full name</span>
                 <input
                   type="text"
+                  {...register("name")}
                   className="mt-1 block w-full p-2 border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                   placeholder="Sudip Kumar Mahato"
                 />
@@ -75,6 +105,7 @@ const ApppointmentNavbar = () => {
                 <span className="text-black">Phone Number</span>
                 <input
                   type="number"
+                  {...register("phone")}
                   className="mt-1 block w-full p-2 border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                   placeholder="1234567890"
                 />
@@ -84,16 +115,29 @@ const ApppointmentNavbar = () => {
                 <span className="text-black">Select Date</span>
                 <input
                   type="date"
+                  {...register("date")}
                   className="mt-1 block w-full p-2 border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 />
               </label>
               <label className="block">
                 <span className="text-black">Select Service</span>
-                <select className="block w-full mt-1 p-2 border-gray-300  focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                  <option>Puncture</option>
-                  <option>Blub Fitting</option>
-                  <option>Chain Tighting</option>
-                  <option>Other</option>
+                <select
+                  className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-3 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                  id="category"
+                  {...register("category")}
+                >
+                  <option disabled selected>
+                    Select your category
+                  </option>
+                  {category?.data?.map((item, index) => (
+                    <option
+                      key={index}
+                      defaultValue={item?._id}
+                      value={item?._id}
+                    >
+                      {item?.name}
+                    </option>
+                  ))}
                 </select>
               </label>
               <label className="block">
@@ -101,29 +145,41 @@ const ApppointmentNavbar = () => {
                 <textarea
                   className="mt-1 outline-none p-2 rounded-lg border block w-full  border-black-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                   rows={3}
+                  {...register("details")}
                   defaultValue={""}
                 />
               </label>
 
               <span>
                 {" "}
-                <input type="checkbox" onChange={(e) => setTicked((prev) => !prev)} name="pick" id="pick" />{" "}
-                <label htmlFor="pick"> Do you want pickup and drop service?</label>{" "}
+                <input
+                  type="checkbox"
+                  onChange={(e) => handleChange()}
+                  name="pick"
+                  id="pick"
+                />{" "}
+                <label htmlFor="pick">
+                  {" "}
+                  Do you want pickup and drop service?
+                </label>{" "}
               </span>
               {ticked && (
                 <input
                   type="text"
-                  name="location"
-                  id="location"
+                  {...register("address")}
+                  ref={inputRef}
                   defaultValue={`${location?.city}, ${location?.country}`}
                   placeholder="Bhatbhateni, Koteshwor"
                 />
               )}
-              <button type="submit" className="bg-blue-600 py-2 px-10 w-fit text-white rounded-md cursor-pointerr">
+              <button
+                type="submit"
+                className="bg-blue-600 py-2 px-10 w-fit text-white rounded-md cursor-pointerr"
+              >
                 Request Appointment
               </button>
             </div>
-          </div>
+          </form>
         </div>
       </div>
       <Footer />

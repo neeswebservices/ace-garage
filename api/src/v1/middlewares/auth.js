@@ -10,39 +10,21 @@ export const Auth = tryCatch(async (req, res, next) => {
   if (!token) {
     throw new APPError("Unauthorized | Please login to continue !", 403);
   }
-  if (token.includes(" ")) {
-    token = token.split(" ")[1];
-    jwt.verify(token, process.env.SECRETTOKEN, async (err, res) => {
-      if (err) {
-        // throw new APPError("Invalid Authentication", 403);
+  token = token?.split(" ")[1];
+  jwt.verify(token, process.env.SECRETTOKEN, async (err, res) => {
+    if (err) {
+      // throw new APPError("Invalid Authentication", 403);
+      throw new APPError("Unauthorized | Please login to continue !", 403);
+    } else {
+      const role = await User.findById(res.id).select("role");
+      if (role == null) {
         throw new APPError("Unauthorized | Please login to continue !", 403);
-      } else {
-        const role = await User.findById(res.id).select("role");
-        if (role == null) {
-          return next(createError("Unauthorized !", 403));
-        }
-        req.user = res.id;
-        req.role = role.role;
-        next();
       }
-    });
-  } else if (!token.includes(" ")) {
-    jwt.verify(token, process.env.SECRETTOKEN, async (err, res) => {
-      if (err) {
-        throw new APPError("Unauthorized | Please login to continue !", 403);
-      } else {
-        const role = await User.findById(res.id).select("role");
-        if (role == null) {
-          return next(createError("Unauthorized !", 403));
-        }
-        req.user = res.id;
-        req.role = role.role;
-        next();
-      }
-    });
-  } else {
-    throw new APPError("Forbidden | Something went wrong !", 403);
-  }
+      req.user = res?.id;
+      req.role = role?.role;
+      next();
+    }
+  });
 });
 
 export const verifyCustomerAsWellAsAdmin = async () => {

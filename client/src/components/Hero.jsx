@@ -79,7 +79,7 @@ export const Hero = () => {
                 type="submit"
                 className="rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white"
               >
-                Submit
+                Search
               </button>
             </form>
           )}

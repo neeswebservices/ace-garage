@@ -37,13 +37,20 @@ router.get("/reports/:id", async (req, res) => {
 
     const doc = new PDFDocument();
     const filename = `report_${reportId}.pdf`;
-    res.setHeader("Content-disposition", 'attachment; filename="' + filename + '"');
+    res.setHeader(
+      "Content-disposition",
+      'attachment; filename="' + filename + '"'
+    );
     res.setHeader("Content-Type", "application/pdf");
     doc.pipe(res);
 
     // Add content to the PDF document
     doc.fontSize(20).text(`Report ${reportId}`, { align: "center" });
-    doc.fontSize(12).text(`Generated on ${new Date().toLocaleDateString()}`, { align: "right" });
+    doc
+      .fontSize(12)
+      .text(`Generated on ${new Date().toLocaleDateString()}`, {
+        align: "right",
+      });
     doc.moveDown();
     doc.text(report.description);
     doc.moveDown();
