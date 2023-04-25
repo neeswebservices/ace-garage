@@ -33,6 +33,7 @@ import ServiceList from "./components/SpareParts";
 import SpareParts from "./components/SpareParts";
 import Sparepart from "./components/Sparepart";
 import FAQ from "./pages/Admin/pages/FAQ";
+import SearchPage from "./pages/SearchPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -64,6 +65,7 @@ function App() {
         <Route path="/spareparts" element={<SpareParts />} />
         <Route path="/single-sparepart" element={<Sparepart />} />
         <Route path="/single-service" element={<Service />} />
+        <Route path="/search/:id" element={<SearchPage />} />
 
         <Route element={<Protected />}>
           <Route path="/appointment" element={<AppointmentNavbar />} />

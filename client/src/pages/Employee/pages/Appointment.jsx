@@ -12,6 +12,8 @@ const Appointment = () => {
     getAPI.getAppointments()
   );
 
+  console.log(data);
+
   async function accept(id) {
     await getAPI.acceptAppointment({ id });
     queryClient.invalidateQueries("appointments");

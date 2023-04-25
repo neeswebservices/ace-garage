@@ -105,9 +105,9 @@ const ApppointmentNavbar = () => {
                 <span className="text-black">Phone Number</span>
                 <input
                   type="number"
-                  {...register("phone")}
                   className="mt-1 block w-full p-2 border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                  placeholder="1234567890"
+                  placeholder="9741844523"
+                  {...register("phone")}
                 />
               </label>
 

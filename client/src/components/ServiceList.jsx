@@ -22,7 +22,7 @@ const ServiceList = () => {
           <div className="flex flex-wrap -mx-4">
             {products?.data?.map((product, index) => (
               <div
-                key={product.id}
+                key={product._id}
                 className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4"
               >
                 <div className="bg-white rounded-sm shadow-md overflow-hidden">

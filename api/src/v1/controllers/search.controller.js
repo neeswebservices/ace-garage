@@ -1,5 +1,8 @@
-import Service from "../models/service.js";
+import Service from "../models/service.model.js";
 import mongoose from "mongoose";
+import tryCatch from "../utils/tryCatch.js";
+import { HttpResponse } from "../utils/HttpResponse.js";
+import Spare from "../models/sparepart.model.js";
 
 export const searchServices = async (req, res) => {
   try {
@@ -31,7 +34,11 @@ export const searchServices = async (req, res) => {
       },
       {
         $match: {
-          $or: [{ title: searchRegExp }, { "category.name": searchRegExp }, { "location.name": searchRegExp }],
+          $or: [
+            { title: searchRegExp },
+            { "category.name": searchRegExp },
+            { "location.name": searchRegExp },
+          ],
         },
       },
       {
@@ -71,3 +78,27 @@ export const searchServices = async (req, res) => {
 // };
 
 // export default searchServices;
+
+export const searchDynamic = tryCatch(async (req, res, next) => {
+  const { id } = req.body;
+  console.log(id);
+
+  const services = await Service.find({ branch: id })
+    .populate("category")
+    .populate("user");
+  return res.send(new HttpResponse("Services", 200, services));
+});
+
+export const singleService = tryCatch(async (req, res, next) => {
+  const { id } = req.body;
+  return res.send(
+    new HttpResponse("Service details", 200, await Service.findById(id))
+  );
+});
+
+export const singleSpare = tryCatch(async (req, res, next) => {
+  const { id } = req.body;
+  return res.send(
+    new HttpResponse("Spare details", 200, await Spare.findById(id))
+  );
+});

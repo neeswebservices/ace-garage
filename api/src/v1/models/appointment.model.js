@@ -8,6 +8,7 @@ const schema = new mongoose.Schema({
     required: true,
     ref: "Category",
   },
+  phone: { type: String, required: true },
   date: { type: Date, required: true },
   details: { type: String },
   address: { type: String },

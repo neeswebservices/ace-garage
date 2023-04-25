@@ -5,9 +5,11 @@ import Spinner from "./common/Spinner";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const Hero = () => {
   const [selectedOption, setSelectedOption] = useState(null);
+  const navigate = useNavigate();
 
   const { register, handleSubmit, reset } = useForm();
 
@@ -29,6 +31,7 @@ export const Hero = () => {
     if (!selectedOption) {
       return toast.error("Please select branch!");
     }
+    navigate(`/search/${selectedOption.value}`);
   };
   const handleSelectChange = (selectedOption) => {
     setSelectedOption(selectedOption);

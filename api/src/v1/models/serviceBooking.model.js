@@ -27,8 +27,13 @@ const bookingSchema = new mongoose.Schema({
 
 const updateTotalPrice = async function (next) {
   const service = await mongoose.model("Service").findById(this.service);
-  const spares = await mongoose.model("Spare").find({ _id: { $in: this.spares } });
-  const sparesTotalPrice = spares.reduce((total, spare) => total + spare.price, 0);
+  const spares = await mongoose
+    .model("Spare")
+    .find({ _id: { $in: this.spares } });
+  const sparesTotalPrice = spares.reduce(
+    (total, spare) => total + spare.price,
+    0
+  );
   const totalPrice = service.price + sparesTotalPrice;
 
   this.totalPrice = totalPrice;
