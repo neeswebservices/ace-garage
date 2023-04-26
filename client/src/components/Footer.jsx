@@ -19,14 +19,14 @@ const Footer = () => {
           </div>
           <div className="mb-8 lg:mb-0">
             <p className="text-lg font-semibold text-gray-700 dark:text-gray-100 mb-6">
-              Our Stores
+              Our Branches
             </p>
             <ul className="flex flex-col space-y-4 font-medium text-[14px] text-gray-500 dark:text-gray-400">
-              <li>Washington</li>
-              <li>New Hampshire</li>
-              <li>Maine</li>
-              <li>Texas</li>
-              <li>Indiana</li>
+              <li>Lahan</li>
+              <li>Kathmandu</li>
+              <li>Lalitpur</li>
+              <li>Bhaktapur</li>
+              <li>Banasthali</li>
             </ul>
           </div>
           <div className="mb-8 lg:mb-0">
@@ -34,11 +34,11 @@ const Footer = () => {
               Services
             </p>
             <ul className="flex flex-col space-y-4 font-medium text-[14px] text-gray-500 dark:text-gray-400">
-              <li>UI / UX Design</li>
-              <li>App Development</li>
-              <li>API reference</li>
-              <li>API status</li>
-              <li>Documentation</li>
+              <li>Bike Washing</li>
+              <li>Bike Servicing</li>
+              <li>Engine Repair</li>
+              <li>Puncture Fitting</li>
+              <li>Break Repairing</li>
             </ul>
           </div>
           <div className="mb-8 lg:mb-0">
