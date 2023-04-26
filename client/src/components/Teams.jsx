@@ -19,8 +19,8 @@ const Teams = () => {
           <div className="absolute inset-0 h-1/2" />
           <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
             <div className="mx-auto max-w-4xl">
-              <dl className="rounded-lg   sm:grid sm:grid-cols-3 bg-gray-100 dark:bg-gray-900">
-                <div className="flex flex-col border-b border-gray-100 dark:border-gray-800 p-6 text-center sm:border-0 sm:border-r">
+              <dl className="rounded-lg   sm:grid sm:grid-cols-3 bg-blue-100 dark:bg-gray-900">
+                <div className="flex flex-col border-b border-black-100 dark:border-gray-800 p-6 text-center sm:border-0 sm:border-r">
                   <dt className="order-2 mt-2 text-lg font-medium leading-6 text-gray-500">
                     Free
                   </dt>

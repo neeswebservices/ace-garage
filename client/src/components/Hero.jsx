@@ -42,16 +42,16 @@ export const Hero = () => {
       <div className="flex items-center max-h-[100vh] h-screen">
         <div className=" px-8 w-1/2">
           <div className="text-7xl text-gray-900 font-semibold">
-            <h1>Building digital</h1>
-            <h1>products, brands</h1>
-            <h1 className="text-blue-600">experience</h1>
+            <h1>Creating garage</h1>
+            <h1>Solution</h1>
+            <h1 className="text-blue-600">experiences</h1>
           </div>
           <div className="mt-4">
             <p className="text-gray-700">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad
-              similique nam fugit veritatis quos expedita quidem maxime at quas
-              voluptatum, architecto maiores excepturi. Quos quia, magnam
-              accusamus quasi impedit necessitatibus.
+              In the garage, anything is possible. You just need the right tools
+              and a little bit of imagination. The garage is not just a space,
+              it's a state of mind. It's where you can turn your ideas into
+              reality and make your mark on the world
             </p>
           </div>
           {isLoading ? (
