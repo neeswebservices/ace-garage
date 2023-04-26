@@ -5,8 +5,6 @@ import logger from "morgan";
 import "dotenv/config";
 import * as url from "url";
 import indexRouter from "./src/v1/routes/index.js";
-import usersRouter from "./src/v1/routes/users.routes.js";
-import authRouter from "./src/v1/routes/auth.routes.js";
 import cors from "cors";
 import getUserLocation from "./src/v1/middlewares/userAddress.js";
 import errorHandler from "./src/v1/utils/errorHandler.js";
