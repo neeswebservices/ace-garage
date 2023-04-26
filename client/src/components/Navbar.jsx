@@ -25,7 +25,7 @@ const Navbar = () => {
 
   return (
     <div className="flex justify-between items-center h-24 max-w-[1240px] mx-auto px-4 text-black  ">
-      <Link to="/" className="w-full text-3xl font-bold text-blue-600">
+      <Link to="/" className="w-full text-4xl font-bold text-blue-600">
         Ace Garage{" "}
       </Link>
       <ul className="hidden md:flex">
