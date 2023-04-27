@@ -42,6 +42,11 @@ const Navbar = () => {
           Connect
         </Link>
 
+        {logged && (
+          <Link to="/mycart" className="p-4">
+            Cart
+          </Link>
+        )}
         {admin === true && logged === true && (
           <Link to="/admin" className="p-4">
             Admin

@@ -10,9 +10,10 @@ export const Auth = tryCatch(async (req, res, next) => {
   if (!token) {
     throw new APPError("Unauthorized | Please login to continue !", 403);
   }
-  token = token?.split(" ")[1];
+  token = String(token).includes(" ") ? token?.split(" ")[1] : token;
   jwt.verify(token, process.env.SECRETTOKEN, async (err, res) => {
     if (err) {
+      console.log(err.message);
       // throw new APPError("Invalid Authentication", 403);
       throw new APPError("Unauthorized | Please login to continue !", 403);
     } else {

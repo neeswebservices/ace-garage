@@ -3,9 +3,18 @@ import axios from "axios";
 import "../App.css";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import { BsFillCartPlusFill } from "react-icons/bs";
 import getAPI from "../api/getApi";
+import Spinner from "./common/Spinner.jsx";
+import { baseURL } from "../api/axiosClient.js";
+// import { useQueryClient } from "react-query";
+import { toast } from "react-toastify";
+
+// function useAddToCart() {
+//   const [mutate, { isLoading }] = useMutation(getAPI.addToCart);
+//   return { addToCart: mutate, loading: isLoading };
+// }
 
 const SpareParts = () => {
   const {
@@ -15,7 +24,70 @@ const SpareParts = () => {
     refetch,
   } = useQuery(["spare"], () => getAPI.getSpare());
 
-  function handleAddToCart() {}
+  // const mutation = useMutation({
+  //   mutationFn: (newTodo) => {
+  //     return axios.post('/todos', newTodo)
+  //   },
+  // })
+
+  // const { addToCart, loading } = useAddToCart();
+
+  // const { mutate, loading } = useMutation(async () => {
+  //   const response = await axios.post('/api/cart', { itemId });
+  //   return response.data;
+  // });
+
+  const {
+    mutate,
+    isLoading: loading,
+    isSuccess,
+    data,
+  } = useMutation((id) => getAPI.addToCart({ id }), {
+    onSuccess: () => {
+      toast.info("Item added to cart");
+    },
+  });
+
+  async function handleAddToCart(product) {
+    console.log(product);
+    try {
+      mutate(product._id);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  // const { mutate } = useMutation((productId) =>
+  //   getAPI.addToCart({ id: productId })
+  // );
+
+  // async function handleAddToCart(product) {
+  //   try {
+  //     await mutate(product._id, );
+  //     console.log("Item added to cart");
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }
+  // async function handleAddToCart(product) {
+  //   console.log(product);
+  //   try {
+  //     const res = useQuery(["item"], () =>
+  //       getAPI.addToCart({ id: product._id })
+  //     );
+  //     console.log(res);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+
+  //   // addToCart({ item }).then(() => {
+  //   // toast.success("Item added to cart");
+  //   // });
+  // }
+
+  // if (loading) {
+  //   return <Spinner />;
+  // }
 
   return (
     <>
@@ -32,7 +104,7 @@ const SpareParts = () => {
             {products ? (
               products?.data?.map((product) => (
                 <div
-                  key={product.id}
+                  key={product._id}
                   className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4"
                 >
                   <div className="bg-white rounded-sm shadow-md overflow-hidden">

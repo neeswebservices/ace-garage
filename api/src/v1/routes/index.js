@@ -8,6 +8,7 @@ import adminRouter from "./admin.routes.js";
 import employeeRouter from "./employee.routes.js";
 import getRouter from "./get.routes.js";
 import bookRouter from "./booking.routes.js";
+import cartRouter from "./cart.routes.js";
 import { Auth, verfiyEmployee, verifyAdmin } from "../middlewares/auth.js";
 
 const router = Router();
@@ -18,9 +19,12 @@ router.get("/", (req, res) => {
 });
 
 router.use("/api/v1/user", usersRouter);
+router.use("/api/v1/cart", cartRouter);
+
 router.use("/api/v1/auth", authRouter);
 router.use("/api/v1/spare", spareRouter);
 router.use("/api/v1/get", getRouter);
+
 router.use("/api/v1/booking/", bookRouter);
 
 router.use("/api/v1/admin", Auth, verifyAdmin, adminRouter);
@@ -46,11 +50,9 @@ router.get("/reports/:id", async (req, res) => {
 
     // Add content to the PDF document
     doc.fontSize(20).text(`Report ${reportId}`, { align: "center" });
-    doc
-      .fontSize(12)
-      .text(`Generated on ${new Date().toLocaleDateString()}`, {
-        align: "right",
-      });
+    doc.fontSize(12).text(`Generated on ${new Date().toLocaleDateString()}`, {
+      align: "right",
+    });
     doc.moveDown();
     doc.text(report.description);
     doc.moveDown();
