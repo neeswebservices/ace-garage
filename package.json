@@ -1,0 +1,22 @@
+{
+  "name": "ace-garage",
+  "version": "1.0.0",
+  "description": "A bike service and management !",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "react": "cd client; npm start",
+    "node": "cd api; npm run dev",
+    "dev": "concurrently \"npm run react\" \"npm run node\"",
+    "prod": "cd api && node --watch ./bin/www.js",
+    "install": "cd client && ni && cd ../api && ni"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^8.0.1"
+  }
+}
