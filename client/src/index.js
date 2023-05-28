@@ -18,11 +18,11 @@ root.render(
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
         <App />
+        <ToastContainer
+          theme="light"
+          style={{ position: "fixed", right: 20, bottom: 20 }}
+        />
       </Provider>
-      <ToastContainer
-        theme="light"
-        style={{ position: "fixed", right: 20, bottom: 20 }}
-      />
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   </React.StrictMode>

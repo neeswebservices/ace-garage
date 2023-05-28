@@ -1,8 +1,6 @@
-import sgMail from "@sendgrid/mail";
 import sanitize from "mongo-sanitize";
 import jwt from "jsonwebtoken";
 import crypto from "node:crypto";
-import { generateToken, verifyToken, returnTime } from "../utils/utils.js";
 import {
   validateUsername,
   validateEmail,
@@ -11,19 +9,17 @@ import {
 import User from "../models/user.model.js";
 import { createError } from "../config/createError.js";
 import bcrypt from "bcryptjs";
+
 import asyncHandler from "express-async-handler";
-import Token from "../models/token.model.js";
+
 import { isValidPhoneNumber } from "../services/phone.js";
 import APPError from "../utils/Error.js";
 import sendOTP from "../services/otp.js";
 import { generateRandom4DigitNumber } from "../services/generator.js";
 import getPhoneCode from "../services/getPhoneCode.js";
-import sendSMS from "../services/vonage.js";
 import tryCatch from "../utils/tryCatch.js";
 import { HttpResponse } from "../utils/HttpResponse.js";
-
-// config of sendgrid to send mail
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+import Cart from "../models/cart.model.js";
 
 export const authRegister = async (req, res, next) => {
   try {
@@ -78,16 +74,17 @@ export const authRegister = async (req, res, next) => {
       generateRandom4DigitNumber(),
       { username }
     );
-    ;
 
-    await User.create({
+    const user = new User({
       username,
       email,
       address,
       password,
       phone,
       ...(name && name),
-    })
+    });
+
+    Promise.all([await user.save(), await Cart.create({ user: user._id })])
       .then((msg) => {
         return res.send(
           new HttpResponse("User registered successfully, Login now !", 200)
@@ -109,42 +106,6 @@ export const userDetails = tryCatch(async (req, res, next) => {
 
   return res.send({ ..._doc, role: req.role });
 });
-
-export const authActivate = async (req, res, next) => {
-  const { token } = req.params || req.body || req.headers["token"];
-  try {
-    if (!token)
-      return res.status(403).send({ success: false, msg: "Invalid request !" });
-
-    jwt.verify(token, process.env.AUTH_SECRET, async (err, result) => {
-      if (err) return res.status(403).send({ msg: "Unauthorized !" });
-      const { username, address, email, password } = result;
-      if (await User.findOne({ $or: [{ username, email }] }))
-        return res.status(403).json({
-          msg: "User Already Activated | Please Login !",
-        });
-      await User.create({
-        username,
-        email,
-        address,
-        password,
-      })
-        .then((msg) => {
-          return res.status(201).send({ msg: "User successfully activated !" });
-        })
-        .catch((err) => {
-          console.log(err);
-          return res.status(400).send({
-            msg: "Failed to Activate user, Try again !",
-          });
-        });
-    });
-  } catch (err) {
-    console.log(err);
-    // process.env.ENV == 'development' ? console.log(err) : null;
-    return res.status(500).json({ msg: "Invalid or token expired !" });
-  }
-};
 
 export const verifyLogin = tryCatch(async (req, res, next) => {
   const { emailorusername, password } = req.body;
@@ -191,11 +152,3 @@ export const checkLogin = asyncHandler(async (req, res, next) => {
 
   throw new APPError("User not logged in !", 400);
 });
-
-
-
-
-
-export const getAccessToken = async (req, res, next) => {};
-
-export const generateRefreshToken = async (req, res, next) => {};

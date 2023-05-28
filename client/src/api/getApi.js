@@ -15,6 +15,9 @@ const getAPI = {
   searched: (params) => getClient.post(`get/searched`, params),
   getSingleService: (params) => getClient.post("get/singleservice", params),
   getSingleSpare: (params) => getClient.get("get/singlespare", params),
+  addToCart: (params) => getClient.post("cart", params),
+  removeFromCart: (params) => getClient.post("cart/remove", params),
+  getCarts: (params) => getClient.get("cart", params),
 };
 
 export default getAPI;

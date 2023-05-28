@@ -34,6 +34,11 @@ import SpareParts from "./components/SpareParts";
 import Sparepart from "./components/Sparepart";
 import FAQ from "./pages/Admin/pages/FAQ";
 import SearchPage from "./pages/SearchPage";
+import CartPage from "./pages/CartPage.jsx";
+
+import { QueryClient, QueryClientProvider } from "react-query";
+
+const queryClient = new QueryClient();
 
 function App() {
   const dispatch = useDispatch();
@@ -55,51 +60,54 @@ function App() {
   // changes
 
   return (
-    <Router>
-      <Routes>
-        <Route exact path="/" element={<HomePage />}></Route>
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/spareparts" element={<SpareParts />} />
-        <Route path="/single-sparepart" element={<Sparepart />} />
-        <Route path="/service/:id" element={<Service />} />
-        <Route path="/search/:id" element={<SearchPage />} />
+    <QueryClientProvider client={queryClient}>
+      <Router>
+        <Routes>
+          <Route exact path="/" element={<HomePage />}></Route>
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/spareparts" element={<SpareParts />} />
+          <Route path="/single-sparepart" element={<Sparepart />} />
+          <Route path="/service/:id" element={<Service />} />
+          <Route path="/search/:id" element={<SearchPage />} />
+          <Route path="/mycart" element={<CartPage />} />
 
-        <Route element={<Protected />}>
-          <Route path="/appointment" element={<AppointmentNavbar />} />
-        </Route>
-
-        {/* Admin */}
-
-        {/* <Route element={<AdminRoute />}> */}
-        <Route path="/admin" element={<Layout />}>
-          <Route index element={<Dashboard />} />
-          <Route path="/admin/branch" element={<CreateBranch />} />
-          <Route path="/admin/totalusers" element={<TotalUser />} />
-          <Route path="/admin/totalemployee" element={<TotalEmployee />} />
-          <Route path="/admin/category" element={<CreateCategory />} />
-          <Route path="/admin/totalproducts" element={<TotalProduct />} />
-          <Route path="/admin/faq" element={<FAQ />} />
-        </Route>
-        {/* </Route> */}
-
-        {/* Employee*/}
-        <Route element={<EmployeeRoute />}>
-          <Route path="/employee" element={<EmployeeLayout />}>
-            <Route index element={<Dashboard />} />
-            <Route path="/employee/addservice" element={<CreateService />} />
-            <Route
-              path="/employee/createsparepart"
-              element={<CreateSparePart />}
-            />
-            <Route path="/employee/appointment" element={<Appointment />} />
-            <Route path="/employee/report" element={<Report />} />
+          <Route element={<Protected />}>
+            <Route path="/appointment" element={<AppointmentNavbar />} />
           </Route>
-        </Route>
-      </Routes>
-    </Router>
+
+          {/* Admin */}
+
+          {/* <Route element={<AdminRoute />}> */}
+          <Route path="/admin" element={<Layout />}>
+            <Route index element={<Dashboard />} />
+            <Route path="/admin/branch" element={<CreateBranch />} />
+            <Route path="/admin/totalusers" element={<TotalUser />} />
+            <Route path="/admin/totalemployee" element={<TotalEmployee />} />
+            <Route path="/admin/category" element={<CreateCategory />} />
+            <Route path="/admin/totalproducts" element={<TotalProduct />} />
+            <Route path="/admin/faq" element={<FAQ />} />
+          </Route>
+          {/* </Route> */}
+
+          {/* Employee*/}
+          <Route element={<EmployeeRoute />}>
+            <Route path="/employee" element={<EmployeeLayout />}>
+              <Route index element={<Dashboard />} />
+              <Route path="/employee/addservice" element={<CreateService />} />
+              <Route
+                path="/employee/createsparepart"
+                element={<CreateSparePart />}
+              />
+              <Route path="/employee/appointment" element={<Appointment />} />
+              <Route path="/employee/report" element={<Report />} />
+            </Route>
+          </Route>
+        </Routes>
+      </Router>
+    </QueryClientProvider>
   );
 }
 
