@@ -16,10 +16,13 @@ const Report = () => {
     html2canvas(reportElement).then((canvas) => {
       const imageData = canvas.toDataURL('image/png');
 
+      // Calculate the aspect ratio of the report element
+      const aspectRatio = canvas.width / canvas.height;
+
       // Create a PDF document
       const pdf = new jsPDF('p', 'mm', 'a4');
       const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = pdf.internal.pageSize.getHeight();
+      const pdfHeight = pdfWidth / aspectRatio;
 
       // Add the image of the report to the PDF
       pdf.addImage(imageData, 'PNG', 0, 0, pdfWidth, pdfHeight);
@@ -29,18 +32,28 @@ const Report = () => {
     });
   };
 
+  const getCurrentDate = () => {
+    const date = new Date();
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return date.toLocaleDateString('en-US', options);
+  };
+
   return (
     <div>
-      <h1 className="p-3 font-2xl text-left">Customer Report</h1>
-      <div className="p-3">
-        <p>
-          <b>Full Name: </b> {spareParts[0].username}
-        </p>
-        <p>
-          <b>Address:</b> {spareParts[0].address}
-        </p>
-      </div>
+
       <div ref={reportRef}>
+        <h1 className="p-3 font-2xl text-left">Customer Report</h1>
+        <div className="p-3">
+          <p>
+            <b>Full Name: </b> {spareParts[0].username}
+          </p>
+          <p>
+            <b>Address:</b> {spareParts[0].address}
+          </p>
+          <p>
+            <b>Date:</b> {getCurrentDate()}
+          </p>
+        </div>
         <table className="min-w-full mt-8 bg-white border border-gray-200">
           <thead>
             <tr>
