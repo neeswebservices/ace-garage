@@ -28,33 +28,32 @@ const server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 mongoose.set("strictQuery", true);
-// mongodb://127.0.0.1:27017/upkeepdev
 
 process.env.MONGOURI
   ? mongoose
-      .connect(process.env.MONGOURI)
-      .then(() => {
-        server.listen(port);
-        server.on("error", onError);
-        server.on("listening", onListening);
-        console.log(`Server listening on ${port} and ${process.env.MONGOURI} connected !!`);
-      })
-      .catch((err) => {
-        console.log(err);
-        process.exit(0);
-      })
+    .connect(process.env.MONGOURI)
+    .then(() => {
+      server.listen(port);
+      server.on("error", onError);
+      server.on("listening", onListening);
+      console.log(`Server listening on ${port} and ${process.env.MONGOURI} connected !!`);
+    })
+    .catch((err) => {
+      console.log(err);
+      process.exit(0);
+    })
   : mongoose
-      .connect(MONGO_URI)
-      .then(() => {
-        server.listen(port);
-        server.on("error", onError);
-        server.on("listening", onListening);
-        console.log("🚀 Listening and MongoDB connected ✅ in port", port);
-      })
-      .catch((err) => {
-        console.log(err);
-        process.exit(0);
-      });
+    .connect(MONGO_URI)
+    .then(() => {
+      server.listen(port);
+      server.on("error", onError);
+      server.on("listening", onListening);
+      console.log("🚀 Listening and MongoDB connected ✅ in port", port);
+    })
+    .catch((err) => {
+      console.log(err);
+      process.exit(0);
+    });
 
 // mongoose
 //     .connect(MONGO_URI)
@@ -124,3 +123,4 @@ function onListening() {
   const bind = typeof addr === "string" ? "pipe " + addr : "port " + addr.port;
   serverDebug("Listening on " + bind);
 }
+
