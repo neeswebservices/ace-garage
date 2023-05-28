@@ -17,7 +17,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "concurrently": "^8.0.1",
-    "html2canvas": "^1.4.1"
+    "concurrently": "^8.0.1"
   }
 }
