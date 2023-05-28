@@ -66,7 +66,10 @@ function CartPage() {
             <div className="font-bold text-2xl text-right mt-8">
               Total Price: ${carts.data?.totalPrice}
             </div>
-            <button className="w-fit bg-gray-200 hover:bg-gray-300 text-gray-700 py-2 px-4 rounded-md">
+            <button
+              onClick={(e) => toast.success("COD is on the way.")}
+              className="w-fit bg-gray-200 hover:bg-gray-300 text-gray-700 py-2 px-4 rounded-md"
+            >
               Checkout
             </button>
           </div>

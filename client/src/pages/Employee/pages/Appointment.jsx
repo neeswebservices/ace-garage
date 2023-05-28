@@ -28,7 +28,7 @@ const Appointment = () => {
   return (
     <div className="flex flex-col h-screen">
       <div className="flex items-center justify-between px-4 py-2 bg-blue-600">
-        <h1 className="text-lg font-semibold text-white">Total Employee</h1>
+        <h1 className="text-lg font-semibold text-white">Total Appointments</h1>
         <button className="px-3 py-1 text-sm font-medium text-white bg-blue-500 rounded hover:bg-blue-800">
           Refresh
         </button>

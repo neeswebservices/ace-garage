@@ -23,7 +23,7 @@ root.render(
           style={{ position: "fixed", right: 20, bottom: 20 }}
         />
       </Provider>
-      <ReactQueryDevtools initialIsOpen={false} />
+      {/* <ReactQueryDevtools initialIsOpen={false}  /> */}
     </QueryClientProvider>
   </React.StrictMode>
 );

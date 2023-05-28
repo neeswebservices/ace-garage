@@ -47,7 +47,7 @@ function App() {
   );
 
   const { data, isFetching, refetch } = useGetDetailsQuery("userDetails", {
-    pollingInterval: 1000,
+    pollingInterval: 50000,
   });
 
   useEffect(() => {

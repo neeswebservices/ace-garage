@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import getAPI from "../api/getApi";
 import Spinner from "./common/Spinner";
 import { useQuery } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 
 const Service = () => {
   const { id } = useParams();
@@ -36,7 +37,7 @@ const Service = () => {
               <h2 className="text-md  font-bold title-font text-black  tracking-widest">
                 {data?.data?.desc}
               </h2>
-              <h2 className="text-md title-font text-red-400  tracking-widest">
+              <h2 className="text-md title-font  tracking-widest">
                 {data?.data?.branch?.address} | {data?.data?.branch?.city}
               </h2>
               <p>{data?.data?.category?.name}</p>
@@ -45,7 +46,10 @@ const Service = () => {
                   Rs. {data?.data?.price}
                 </span>
               </div>
-              <button className="ml-auto  mt-4 rounded-md bg-blue-600 px-3.5 py-1.5 text-base font-semibold leading-7 text-white hover:bg-red-500">
+              <button
+                onClick={(e) => toast.info("Service Booked")}
+                className="ml-auto  mt-4 rounded-md bg-blue-600 px-3.5 py-1.5 text-base font-semibold leading-7 text-white hover:bg-red-500"
+              >
                 Book Service
               </button>
             </div>

@@ -27,33 +27,34 @@ const ServiceList = () => {
         {/* Service List */}
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 ">
           <div className="flex flex-wrap -mx-4">
-            {Array.from(products?.data).map((product, index) => (
-              <Link
-                to={`service/${product?._id}`}
-                key={index}
-                className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4"
-              >
-                <div className="bg-white rounded-sm shadow-md overflow-hidden">
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full h-48 object-cover hover:scale-[1.1]"
-                  />
-                  <div className="p-4">
-                    <h2 className="text-lg font-semibold text-gray-900">
-                      {product.name}
-                    </h2>
-                    <p className="text-gray-700">{product.description}</p>
-                    <p className="mt-2 text-gray-900 font-bold">
-                      Rs.{product.price}
-                    </p>
-                    <button className="bg-blue-500 text-white font-bold py-2 px-4 w-full rounded mt-4 hover:bg-blue-700">
-                      Book Now
-                    </button>
+            {products &&
+              Array.from(products?.data).map((product, index) => (
+                <Link
+                  to={`service/${product?._id}`}
+                  key={index}
+                  className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4"
+                >
+                  <div className="bg-white rounded-sm shadow-md overflow-hidden">
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="w-full h-48 object-cover hover:scale-[1.1]"
+                    />
+                    <div className="p-4">
+                      <h2 className="text-lg font-semibold text-gray-900">
+                        {product.name}
+                      </h2>
+                      <p className="text-gray-700">{product.description}</p>
+                      <p className="mt-2 text-gray-900 font-bold">
+                        Rs.{product.price}
+                      </p>
+                      <button className="bg-blue-500 text-white font-bold py-2 px-4 w-full rounded mt-4 hover:bg-blue-700">
+                        Book Now
+                      </button>
+                    </div>
                   </div>
-                </div>
-              </Link>
-            ))}
+                </Link>
+              ))}
           </div>
         </div>
       </div>

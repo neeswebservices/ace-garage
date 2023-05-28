@@ -7,15 +7,20 @@ import tryCatch from "../utils/tryCatch.js";
 
 export const Auth = tryCatch(async (req, res, next) => {
   let token = req.headers?.authorization || req.cookies?.accesstoken;
+  console.log(token);
   if (!token) {
     throw new APPError("Unauthorized | Please login to continue !", 403);
   }
   token = String(token).includes(" ") ? token?.split(" ")[1] : token;
+  console.log(token + " this test");
   jwt.verify(token, process.env.SECRETTOKEN, async (err, res) => {
     if (err) {
-      console.log(err.message);
+      // console.log(err);
+      // console.log(err.message);
+      throw new APPError("Invalid login token authorization !", 400);
+
       // throw new APPError("Invalid Authentication", 403);
-      throw new APPError("Unauthorized | Please login to continue !", 403);
+      // throw new APPError("Unauthorized | Please login to continue !", 403);
     } else {
       const role = await User.findById(res.id).select("role");
       if (role == null) {
