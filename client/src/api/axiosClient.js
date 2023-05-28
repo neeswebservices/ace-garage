@@ -2,7 +2,7 @@ import axios from "axios";
 import queryString from "query-string";
 import { toast } from "react-toastify";
 
-export const baseURL = "http://192.168.18.82:8000/api/v1";
+export const baseURL = "http://localhost:8000/api/v1";
 export const getToken = () => localStorage?.getItem("token");
 
 const axiosClient = axios.create({
